@@ -1,0 +1,10 @@
+{
+"SpaProxyServer": {
+"ServerUrl": "https://localhost:51888",
+"RedirectUrl": "",
+"LaunchCommand": "npm run dev",
+"WorkingDirectory": "C:\\Users\\molna\\Documents\\Anul 3\\Sem 2\\TD\\Proiect\\MasiniRo\\MasiniRo.Server\\..\\masiniro.client",
+"MaxTimeoutInSeconds": "120",
+"KeepRunning": "false"
+}
+}

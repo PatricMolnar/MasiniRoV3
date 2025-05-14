@@ -1,0 +1,2 @@
+# MasiniRo
+Platforma vanzari automobile
