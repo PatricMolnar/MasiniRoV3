@@ -1,13 +1,13 @@
 {
   "Version": 1,
-  "Hash": "zFVRKcn9OhQeNWuBvxX4ynxsME3dZSGBAY8c5AvdER4=",
+  "Hash": "0D94KLuUvPTZkvIIbIsWl5ApETM85SdUlIyt/0nthig=",
   "Source": "MasiniRo.Server",
   "BasePath": "_content/MasiniRo.Server",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [
     {
-      "Identity": "C:\\Users\\molna\\Documents\\Anul 3\\Sem 2\\TD\\Proiect\\MasiniRo\\masiniro.client\\masiniro.client.esproj",
+      "Identity": "C:\\Users\\Cobra\\Desktop\\fac\\an3sem2\\td\\Proiect Td\\MasiniRoV3\\masiniro.client\\masiniro.client.esproj",
       "Version": 2,
       "Source": "masiniro.client",
       "GetPublishAssetsTargets": "GetCurrentProjectPublishStaticWebAssetItems",
