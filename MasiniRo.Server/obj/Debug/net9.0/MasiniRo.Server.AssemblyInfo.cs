@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MasiniRo.Server")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7ca808976a2b39f514197d929eab0053e3dc1a31")]
 [assembly: System.Reflection.AssemblyProductAttribute("MasiniRo.Server")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MasiniRo.Server")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
