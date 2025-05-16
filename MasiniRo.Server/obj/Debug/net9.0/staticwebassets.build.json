@@ -1,21 +1,21 @@
 {
   "Version": 1,
-  "Hash": "0D94KLuUvPTZkvIIbIsWl5ApETM85SdUlIyt/0nthig=",
+  "Hash": "YyP92ADMbMRm1oV/m9cKrE4+3+rDA5JWn4fmqww9FU0=",
   "Source": "MasiniRo.Server",
   "BasePath": "_content/MasiniRo.Server",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [
     {
-      "Identity": "C:\\Users\\Cobra\\Desktop\\fac\\an3sem2\\td\\Proiect Td\\MasiniRoV3\\masiniro.client\\masiniro.client.esproj",
+      "Identity": "C:\\Users\\molna\\Documents\\Anul 3\\Sem 2\\TD\\Proiect\\MasiniRo\\masiniro.client\\masiniro.client.esproj",
       "Version": 2,
       "Source": "masiniro.client",
       "GetPublishAssetsTargets": "GetCurrentProjectPublishStaticWebAssetItems",
-      "AdditionalPublishProperties": "",
-      "AdditionalPublishPropertiesToRemove": "WebPublishProfileFile;TargetFramework;RuntimeIdentifier;SelfContained",
+      "AdditionalPublishProperties": "Configuration=Debug;Platform=AnyCPU",
+      "AdditionalPublishPropertiesToRemove": "WebPublishProfileFile;TargetFramework",
       "GetBuildAssetsTargets": "GetCurrentProjectBuildStaticWebAssetItems",
-      "AdditionalBuildProperties": "",
-      "AdditionalBuildPropertiesToRemove": "WebPublishProfileFile;TargetFramework;RuntimeIdentifier;SelfContained"
+      "AdditionalBuildProperties": "Configuration=Debug;Platform=AnyCPU",
+      "AdditionalBuildPropertiesToRemove": "WebPublishProfileFile;TargetFramework"
     }
   ],
   "DiscoveryPatterns": [],
