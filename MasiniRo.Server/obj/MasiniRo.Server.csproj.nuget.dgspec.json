@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Cobra\\Desktop\\fac\\an3sem2\\td\\Proiect Td\\MasiniRoV3\\masiniro.server\\MasiniRo.Server.csproj": {}
+    "C:\\Users\\molna\\Documents\\Anul 3\\Sem 2\\TD\\Proiect\\MasiniRo\\MasiniRo.Server\\MasiniRo.Server.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Cobra\\Desktop\\fac\\an3sem2\\td\\Proiect Td\\MasiniRoV3\\masiniro.server\\MasiniRo.Server.csproj": {
+    "C:\\Users\\molna\\Documents\\Anul 3\\Sem 2\\TD\\Proiect\\MasiniRo\\MasiniRo.Server\\MasiniRo.Server.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Cobra\\Desktop\\fac\\an3sem2\\td\\Proiect Td\\MasiniRoV3\\masiniro.server\\MasiniRo.Server.csproj",
+        "projectUniqueName": "C:\\Users\\molna\\Documents\\Anul 3\\Sem 2\\TD\\Proiect\\MasiniRo\\MasiniRo.Server\\MasiniRo.Server.csproj",
         "projectName": "MasiniRo.Server",
-        "projectPath": "C:\\Users\\Cobra\\Desktop\\fac\\an3sem2\\td\\Proiect Td\\MasiniRoV3\\masiniro.server\\MasiniRo.Server.csproj",
-        "packagesPath": "C:\\Users\\Cobra\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Cobra\\Desktop\\fac\\an3sem2\\td\\Proiect Td\\MasiniRoV3\\masiniro.server\\obj\\",
+        "projectPath": "C:\\Users\\molna\\Documents\\Anul 3\\Sem 2\\TD\\Proiect\\MasiniRo\\MasiniRo.Server\\MasiniRo.Server.csproj",
+        "packagesPath": "C:\\Users\\molna\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\molna\\Documents\\Anul 3\\Sem 2\\TD\\Proiect\\MasiniRo\\MasiniRo.Server\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Cobra\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\molna\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -26,7 +26,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -93,7 +92,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.202/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
