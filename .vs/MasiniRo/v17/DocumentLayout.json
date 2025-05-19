@@ -3,16 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\molna\\Documents\\Anul 3\\Sem 2\\TD\\Proiect\\MasiniRo\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{1F6DA13E-60A7-49AD-9EF4-C52C6A82F5BF}|MasiniRo.Server\\MasiniRo.Server.csproj|c:\\users\\molna\\documents\\anul 3\\sem 2\\td\\proiect\\masiniro\\masiniro.server\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1F6DA13E-60A7-49AD-9EF4-C52C6A82F5BF}|MasiniRo.Server\\MasiniRo.Server.csproj|solutionrelative:masiniro.server\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1F6DA13E-60A7-49AD-9EF4-C52C6A82F5BF}|MasiniRo.Server\\MasiniRo.Server.csproj|c:\\users\\molna\\documents\\anul 3\\sem 2\\td\\proiect\\masiniro\\masiniro.server\\data\\appdbcontextfactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1F6DA13E-60A7-49AD-9EF4-C52C6A82F5BF}|MasiniRo.Server\\MasiniRo.Server.csproj|solutionrelative:masiniro.server\\data\\appdbcontextfactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F9CD44E3-8CFD-9C47-8767-5F7A2C45C291}|masiniro.client\\masiniro.client.esproj|c:\\users\\molna\\documents\\anul 3\\sem 2\\td\\proiect\\masiniro\\masiniro.client\\.gitignore||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{F9CD44E3-8CFD-9C47-8767-5F7A2C45C291}|masiniro.client\\masiniro.client.esproj|solutionrelative:masiniro.client\\.gitignore||{3B902123-F8A7-4915-9F01-361F908088D0}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{1F6DA13E-60A7-49AD-9EF4-C52C6A82F5BF}|MasiniRo.Server\\MasiniRo.Server.csproj|c:\\users\\molna\\documents\\anul 3\\sem 2\\td\\proiect\\masiniro\\masiniro.server\\models\\carlisting.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{1F6DA13E-60A7-49AD-9EF4-C52C6A82F5BF}|MasiniRo.Server\\MasiniRo.Server.csproj|solutionrelative:masiniro.server\\models\\carlisting.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1F6DA13E-60A7-49AD-9EF4-C52C6A82F5BF}|MasiniRo.Server\\MasiniRo.Server.csproj|c:\\users\\molna\\documents\\anul 3\\sem 2\\td\\proiect\\masiniro\\masiniro.server\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1F6DA13E-60A7-49AD-9EF4-C52C6A82F5BF}|MasiniRo.Server\\MasiniRo.Server.csproj|solutionrelative:masiniro.server\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{1F6DA13E-60A7-49AD-9EF4-C52C6A82F5BF}|MasiniRo.Server\\MasiniRo.Server.csproj|c:\\users\\molna\\documents\\anul 3\\sem 2\\td\\proiect\\masiniro\\masiniro.server\\models\\appuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -21,6 +21,10 @@
     {
       "AbsoluteMoniker": "D:0:0:{1F6DA13E-60A7-49AD-9EF4-C52C6A82F5BF}|MasiniRo.Server\\MasiniRo.Server.csproj|c:\\users\\molna\\documents\\anul 3\\sem 2\\td\\proiect\\masiniro\\masiniro.server\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{1F6DA13E-60A7-49AD-9EF4-C52C6A82F5BF}|MasiniRo.Server\\MasiniRo.Server.csproj|solutionrelative:masiniro.server\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1F6DA13E-60A7-49AD-9EF4-C52C6A82F5BF}|MasiniRo.Server\\MasiniRo.Server.csproj|c:\\users\\molna\\documents\\anul 3\\sem 2\\td\\proiect\\masiniro\\masiniro.server\\data\\appdbcontextfactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1F6DA13E-60A7-49AD-9EF4-C52C6A82F5BF}|MasiniRo.Server\\MasiniRo.Server.csproj|solutionrelative:masiniro.server\\data\\appdbcontextfactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{1F6DA13E-60A7-49AD-9EF4-C52C6A82F5BF}|MasiniRo.Server\\MasiniRo.Server.csproj|c:\\users\\molna\\documents\\anul 3\\sem 2\\td\\proiect\\masiniro\\masiniro.server\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
@@ -34,7 +38,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Bookmark",
@@ -42,7 +46,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
+              "Title": ".gitignore",
+              "DocumentMoniker": "C:\\Users\\molna\\Documents\\Anul 3\\Sem 2\\TD\\Proiect\\MasiniRo\\masiniro.client\\.gitignore",
+              "RelativeDocumentMoniker": "masiniro.client\\.gitignore",
+              "ToolTip": "C:\\Users\\molna\\Documents\\Anul 3\\Sem 2\\TD\\Proiect\\MasiniRo\\masiniro.client\\.gitignore",
+              "RelativeToolTip": "masiniro.client\\.gitignore",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-05-16T19:41:12.33Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
               "Title": "AppDbContextFactory.cs",
               "DocumentMoniker": "C:\\Users\\molna\\Documents\\Anul 3\\Sem 2\\TD\\Proiect\\MasiniRo\\MasiniRo.Server\\Data\\AppDbContextFactory.cs",
               "RelativeDocumentMoniker": "MasiniRo.Server\\Data\\AppDbContextFactory.cs",
@@ -60,19 +77,20 @@
               "RelativeDocumentMoniker": "MasiniRo.Server\\Program.cs",
               "ToolTip": "C:\\Users\\molna\\Documents\\Anul 3\\Sem 2\\TD\\Proiect\\MasiniRo\\MasiniRo.Server\\Program.cs",
               "RelativeToolTip": "MasiniRo.Server\\Program.cs",
-              "ViewState": "AgIAABgAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAABaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-12T15:40:54.615Z"
+              "WhenOpened": "2025-05-12T15:40:54.615Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "AppDbContext.cs",
               "DocumentMoniker": "C:\\Users\\molna\\Documents\\Anul 3\\Sem 2\\TD\\Proiect\\MasiniRo\\MasiniRo.Server\\Data\\AppDbContext.cs",
               "RelativeDocumentMoniker": "MasiniRo.Server\\Data\\AppDbContext.cs",
               "ToolTip": "C:\\Users\\molna\\Documents\\Anul 3\\Sem 2\\TD\\Proiect\\MasiniRo\\MasiniRo.Server\\Data\\AppDbContext.cs",
               "RelativeToolTip": "MasiniRo.Server\\Data\\AppDbContext.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAA6AAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAApAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-12T15:37:14.733Z",
               "EditorCaption": ""
@@ -85,25 +103,27 @@
               "RelativeDocumentMoniker": "MasiniRo.Server\\Models\\AppUser.cs",
               "ToolTip": "C:\\Users\\molna\\Documents\\Anul 3\\Sem 2\\TD\\Proiect\\MasiniRo\\MasiniRo.Server\\Models\\AppUser.cs",
               "RelativeToolTip": "MasiniRo.Server\\Models\\AppUser.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAnAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-12T15:35:55.42Z"
+              "WhenOpened": "2025-05-12T15:35:55.42Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "CarListing.cs",
               "DocumentMoniker": "C:\\Users\\molna\\Documents\\Anul 3\\Sem 2\\TD\\Proiect\\MasiniRo\\MasiniRo.Server\\Models\\CarListing.cs",
               "RelativeDocumentMoniker": "MasiniRo.Server\\Models\\CarListing.cs",
               "ToolTip": "C:\\Users\\molna\\Documents\\Anul 3\\Sem 2\\TD\\Proiect\\MasiniRo\\MasiniRo.Server\\Models\\CarListing.cs",
               "RelativeToolTip": "MasiniRo.Server\\Models\\CarListing.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAuwAYAAAAWAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-12T15:30:46.939Z"
+              "WhenOpened": "2025-05-12T15:30:46.939Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "appsettings.json",
               "DocumentMoniker": "C:\\Users\\molna\\Documents\\Anul 3\\Sem 2\\TD\\Proiect\\MasiniRo\\MasiniRo.Server\\appsettings.json",
               "RelativeDocumentMoniker": "MasiniRo.Server\\appsettings.json",
