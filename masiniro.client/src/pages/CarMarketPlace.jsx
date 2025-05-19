@@ -1,34 +1,71 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import '../styles/CarMarketplace.css';
 import Header from '../components/Header';
 import SearchBar from '../components/SearchBar';
 import CarCard from '../components/CarCard';
+import CarDetail from '../components/CarDetail';
 import Footer from '../components/Footer';
 
 const CarMarketplace = () => {
+    const [cars, setCars] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        const fetchCars = async () => {
+            try {
+                const response = await fetch('/api/CarListings');
+                if (!response.ok) {
+                    throw new Error('Failed to fetch cars');
+                }
+                const data = await response.json();
+                setCars(data);
+            } catch (err) {
+                setError(err.message);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchCars();
+    }, []);
+
+    if (loading) {
+        return <div className="loading">Loading...</div>;
+    }
+
+    if (error) {
+        return <div className="error">Error: {error}</div>;
+    }
+
     return (
-        <div>
-            <Header />
-            <div className="container">
-                <SearchBar />
-                <div className="car-grid">
-                    <CarCard
-                        image="https://via.placeholder.com/300x180"
-                        title="2019 Toyota Corolla"
-                        price="$14,000"
-                        mileage="30,000 miles"
-                    />
-                    <CarCard
-                        image="https://via.placeholder.com/300x180"
-                        title="2021 Tesla Model 3"
-                        price="$35,000"
-                        mileage="10,000 miles"
-                    />
-                    {/* Add more CarCard components as needed */}
-                </div>
+        <Router>
+            <div>
+                <Header />
+                <Routes>
+                    <Route path="/" element={
+                        <div className="container">
+                            <SearchBar />
+                            <div className="car-grid">
+                                {cars.map(car => (
+                                    <CarCard
+                                        key={car.id}
+                                        id={car.id}
+                                        image={car.imageUrl}
+                                        title={car.title}
+                                        price={car.price}
+                                        mileage={`${car.mileage?.toLocaleString() || 'N/A'} miles`}
+                                    />
+                                ))}
+                            </div>
+                        </div>
+                    } />
+                    <Route path="/car/:id" element={<CarDetail />} />
+                </Routes>
+                <Footer />
             </div>
-            <Footer />
-        </div>
+        </Router>
     );
 };
 

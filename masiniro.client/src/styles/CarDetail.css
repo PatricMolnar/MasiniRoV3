@@ -1,0 +1,170 @@
+.car-detail-container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.car-detail-header {
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.car-detail-header h1 {
+    font-size: 2.5rem;
+    color: #004080;
+    margin-bottom: 0.5rem;
+}
+
+.car-price {
+    font-size: 1.5rem;
+    color: #007acc;
+    font-weight: 600;
+}
+
+.car-detail-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+}
+
+.car-image-container {
+    width: 100%;
+    height: 400px;
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+.car-detail-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.car-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.car-specs {
+    background-color: #f8fafc;
+    padding: 1.5rem;
+    border-radius: 8px;
+}
+
+.car-specs h2 {
+    color: #004080;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+.specs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.spec-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.spec-label {
+    color: #64748b;
+    font-size: 0.9rem;
+}
+
+.spec-value {
+    color: #1e293b;
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+.car-description {
+    padding: 1.5rem;
+    background-color: #f8fafc;
+    border-radius: 8px;
+}
+
+.car-description h2 {
+    color: #004080;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+.car-description p {
+    color: #1e293b;
+    line-height: 1.6;
+}
+
+.car-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.contact-button, .save-button {
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 500;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.contact-button {
+    background-color: #007acc;
+    color: white;
+    flex: 2;
+}
+
+.save-button {
+    background-color: #f1f5f9;
+    color: #1e293b;
+    flex: 1;
+}
+
+.contact-button:hover {
+    background-color: #005fa3;
+}
+
+.save-button:hover {
+    background-color: #e2e8f0;
+}
+
+.car-detail-loading,
+.car-detail-error,
+.car-detail-not-found {
+    text-align: center;
+    padding: 2rem;
+    font-size: 1.2rem;
+    color: #64748b;
+}
+
+.car-detail-error {
+    color: #dc2626;
+}
+
+@media (max-width: 768px) {
+    .car-detail-content {
+        grid-template-columns: 1fr;
+    }
+
+    .car-image-container {
+        height: 300px;
+    }
+
+    .car-actions {
+        flex-direction: column;
+    }
+
+    .contact-button, .save-button {
+        width: 100%;
+    }
+} 

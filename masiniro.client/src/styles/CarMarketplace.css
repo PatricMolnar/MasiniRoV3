@@ -112,3 +112,29 @@
 .search-bar button:active {
     transform: translateY(1px);
 }
+
+.view-details-button {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    background-color: #007acc;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: background-color 0.2s ease;
+}
+
+.view-details-button:hover {
+    background-color: #005fa3;
+}
+
+.loading, .error {
+    text-align: center;
+    padding: 2rem;
+    font-size: 1.2rem;
+    color: #64748b;
+}
+
+.error {
+    color: #dc2626;
+}

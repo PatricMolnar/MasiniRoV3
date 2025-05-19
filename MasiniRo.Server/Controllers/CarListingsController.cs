@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace MasiniRo.Server.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/CarListings")]
     public class CarListingsController : ControllerBase
     {
         private readonly AppDbContext _context;

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "YyP92ADMbMRm1oV/m9cKrE4+3+rDA5JWn4fmqww9FU0=",
+  "Hash": "zFVRKcn9OhQeNWuBvxX4ynxsME3dZSGBAY8c5AvdER4=",
   "Source": "MasiniRo.Server",
   "BasePath": "_content/MasiniRo.Server",
   "Mode": "Default",
@@ -11,11 +11,11 @@
       "Version": 2,
       "Source": "masiniro.client",
       "GetPublishAssetsTargets": "GetCurrentProjectPublishStaticWebAssetItems",
-      "AdditionalPublishProperties": "Configuration=Debug;Platform=AnyCPU",
-      "AdditionalPublishPropertiesToRemove": "WebPublishProfileFile;TargetFramework",
+      "AdditionalPublishProperties": "",
+      "AdditionalPublishPropertiesToRemove": "WebPublishProfileFile;TargetFramework;RuntimeIdentifier;SelfContained",
       "GetBuildAssetsTargets": "GetCurrentProjectBuildStaticWebAssetItems",
-      "AdditionalBuildProperties": "Configuration=Debug;Platform=AnyCPU",
-      "AdditionalBuildPropertiesToRemove": "WebPublishProfileFile;TargetFramework"
+      "AdditionalBuildProperties": "",
+      "AdditionalBuildPropertiesToRemove": "WebPublishProfileFile;TargetFramework;RuntimeIdentifier;SelfContained"
     }
   ],
   "DiscoveryPatterns": [],

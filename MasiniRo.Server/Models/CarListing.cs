@@ -1,7 +1,10 @@
-﻿namespace MasiniRo.Server.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace MasiniRo.Server.Models
 {
     public class CarListing
     {
+        [Key]
         public int Id { get; set; }
         public string Title { get; set; }
         public string Brand { get; set; }
