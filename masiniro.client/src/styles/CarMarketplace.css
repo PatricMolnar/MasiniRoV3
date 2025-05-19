@@ -1,0 +1,114 @@
+/* CarMarketplace.css */
+
+.marketplace-container {
+    padding: 2rem;
+    background-color: #f4f7fa;
+    color: #1a1a1a;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+    .marketplace-container h1 {
+        font-size: 2rem;
+        margin-bottom: 1.5rem;
+        color: #004080;
+    }
+
+.car-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.car-card {
+    background-color: #ffffff;
+    border: 1px solid #d0d7e2;
+    border-radius: 10px;
+    padding: 1rem;
+    box-shadow: 0 4px 8px rgba(0, 64, 128, 0.05);
+    transition: transform 0.2s ease;
+}
+
+    .car-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 12px rgba(0, 64, 128, 0.15);
+    }
+
+    .car-card img {
+        width: 100%;
+        height: auto;
+        border-radius: 8px;
+        margin-bottom: 1rem;
+    }
+
+    .car-card h2 {
+        font-size: 1.25rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .car-card p {
+        margin: 0.25rem 0;
+        font-size: 0.95rem;
+    }
+
+    .car-card button {
+        margin-top: 0.75rem;
+        background-color: #007acc;
+        color: white;
+        padding: 0.5rem 1rem;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+    }
+
+        .car-card button:hover {
+            background-color: #005fa3;
+        }
+
+.search-bar {
+    display: flex;
+    gap: 1rem;
+    margin: 2rem auto;
+    max-width: 600px;
+    padding: 0 1rem;
+}
+
+.search-bar input {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    border: 2px solid #d0d7e2;
+    border-radius: 8px;
+    background-color: white;
+    transition: all 0.2s ease;
+}
+
+.search-bar input:focus {
+    outline: none;
+    border-color: #007acc;
+    box-shadow: 0 0 0 3px rgba(0, 122, 204, 0.1);
+}
+
+.search-bar input::placeholder {
+    color: #94a3b8;
+}
+
+.search-bar button {
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 500;
+    color: white;
+    background-color: #007acc;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.search-bar button:hover {
+    background-color: #005fa3;
+}
+
+.search-bar button:active {
+    transform: translateY(1px);
+}
