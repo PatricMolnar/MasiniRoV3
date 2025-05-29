@@ -4,6 +4,9 @@ using MasiniRo.Server.Data;
 using MasiniRo.Server.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using System.IO;
+using System;
 
 namespace MasiniRo.Server.Controllers
 {
@@ -43,6 +46,44 @@ namespace MasiniRo.Server.Controllers
         [HttpPost]
         public async Task<ActionResult<CarListing>> PostCarListing(CarListing carListing)
         {
+            _context.CarListings.Add(carListing);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction(nameof(GetCarListing), new { id = carListing.Id }, carListing);
+        }
+
+        // POST: api/CarListings/upload
+        [HttpPost("upload")]
+        public async Task<ActionResult<CarListing>> UploadCarListing([FromForm] string title, [FromForm] string brand, [FromForm] string model, [FromForm] decimal price, [FromForm] int year, [FromForm] string description, [FromForm] IFormFile imageFile)
+        {
+            if (imageFile == null || imageFile.Length == 0)
+            {
+                return BadRequest("Image file is required.");
+            }
+
+            // Save the image to wwwroot/images
+            var imagesPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images");
+            if (!Directory.Exists(imagesPath))
+                Directory.CreateDirectory(imagesPath);
+            var fileName = $"{Guid.NewGuid()}_{imageFile.FileName}";
+            var filePath = Path.Combine(imagesPath, fileName);
+            using (var stream = new FileStream(filePath, FileMode.Create))
+            {
+                await imageFile.CopyToAsync(stream);
+            }
+            var imageUrl = $"/images/{fileName}";
+
+            var carListing = new CarListing
+            {
+                Title = title,
+                Brand = brand,
+                Model = model,
+                Price = price,
+                Year = year,
+                Description = description,
+                ImageUrl = imageUrl
+            };
+
             _context.CarListings.Add(carListing);
             await _context.SaveChangesAsync();
 
