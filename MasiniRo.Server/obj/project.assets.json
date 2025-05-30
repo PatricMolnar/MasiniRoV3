@@ -4979,23 +4979,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Cobra\\.nuget\\packages\\": {},
+    "C:\\Users\\masch\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Cobra\\Desktop\\fac\\an3sem2\\td\\Proiect Td\\MasiniRoV3\\masiniro.server\\MasiniRo.Server.csproj",
+      "projectUniqueName": "C:\\Facultate\\An3\\Sem2\\TD\\td_proiect\\MasiniRoV3\\masiniro.server\\MasiniRo.Server.csproj",
       "projectName": "MasiniRo.Server",
-      "projectPath": "C:\\Users\\Cobra\\Desktop\\fac\\an3sem2\\td\\Proiect Td\\MasiniRoV3\\masiniro.server\\MasiniRo.Server.csproj",
-      "packagesPath": "C:\\Users\\Cobra\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Cobra\\Desktop\\fac\\an3sem2\\td\\Proiect Td\\MasiniRoV3\\masiniro.server\\obj\\",
+      "projectPath": "C:\\Facultate\\An3\\Sem2\\TD\\td_proiect\\MasiniRoV3\\masiniro.server\\MasiniRo.Server.csproj",
+      "packagesPath": "C:\\Users\\masch\\.nuget\\packages\\",
+      "outputPath": "C:\\Facultate\\An3\\Sem2\\TD\\td_proiect\\MasiniRoV3\\masiniro.server\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\Cobra\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\masch\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -5071,7 +5071,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.202/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.201/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

@@ -3,7 +3,7 @@ import '../styles/CarMarketplace.css';
 
 const Footer = () => (
     <footer>
-        <p>Fut Maschio</p>
+        <p>© 2025 All Rights Reserved</p>
     </footer>
 );
 

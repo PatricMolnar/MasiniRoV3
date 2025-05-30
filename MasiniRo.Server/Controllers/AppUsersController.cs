@@ -4,6 +4,7 @@ using MasiniRo.Server.Data;
 using MasiniRo.Server.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace MasiniRo.Server.Controllers
 {
@@ -95,9 +96,32 @@ namespace MasiniRo.Server.Controllers
             return NoContent();
         }
 
+        // POST: api/AppUsers/login
+        [HttpPost("login")]
+        public async Task<IActionResult> Login([FromBody] LoginRequest loginRequest)
+        {
+            var user = await _context.AppUsers
+                .FirstOrDefaultAsync(u => u.Email == loginRequest.Email && u.Password == loginRequest.Password);
+
+            if (user == null)
+            {
+                return Unauthorized(new { message = "Invalid email or password." });
+            }
+
+            // In a real application, you would generate a JWT token here
+            return Ok(new { message = "Login successful", userId = user.Id });
+        }
+
         private bool AppUserExists(int id)
         {
             return _context.AppUsers.Any(e => e.Id == id);
         }
+    }
+
+    // Helper class for login request body
+    public class LoginRequest
+    {
+        public string Email { get; set; }
+        public string Password { get; set; }
     }
 } 

@@ -81,6 +81,7 @@
     border-radius: 8px;
     background-color: white;
     transition: all 0.2s ease;
+    color: #000000;
 }
 
 .search-bar input:focus {
@@ -179,6 +180,7 @@
     border-radius: 8px;
     background-color: #f4f7fa;
     transition: border-color 0.2s;
+    color: #000000;
 }
 
 .add-car-form input:focus {
@@ -193,34 +195,32 @@
     justify-content: flex-end;
 }
 
-.add-car-form button[type="submit"] {
-    background-color: #007acc;
-    color: white;
+.add-car-form-buttons button {
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 500;
     border: none;
     border-radius: 8px;
-    padding: 0.6rem 1.5rem;
-    font-size: 1rem;
     cursor: pointer;
-    transition: background-color 0.2s;
+    transition: background-color 0.2s ease;
 }
 
-.add-car-form button[type="submit"]:hover {
+.add-car-form-buttons button[type="submit"] {
+    background-color: #007acc;
+    color: white;
+}
+
+.add-car-form-buttons button[type="submit"]:hover {
     background-color: #005fa3;
 }
 
-.add-car-form button[type="button"] {
-    background: #e2e8f0;
-    color: #1a1a1a;
-    border: none;
-    border-radius: 8px;
-    padding: 0.6rem 1.5rem;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background 0.2s;
+.add-car-form-buttons button[type="button"] {
+    background-color: #e2e8f0;
+    color: #1e293b;
 }
 
-.add-car-form button[type="button"]:hover {
-    background: #cbd5e1;
+.add-car-form-buttons button[type="button"]:hover {
+    background-color: #cbd5e1;
 }
 
 .add-car-btn {

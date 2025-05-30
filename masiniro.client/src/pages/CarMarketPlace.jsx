@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import '../styles/CarMarketplace.css';
 import Header from '../components/Header';
 import SearchBar from '../components/SearchBar';
 import CarCard from '../components/CarCard';
-import CarDetail from '../components/CarDetail';
 import Footer from '../components/Footer';
 import AddCarForm from '../components/AddCarForm';
 
@@ -44,41 +42,34 @@ const CarMarketplace = () => {
     }
 
     return (
-        <Router>
-            <div>
-                <Header />
-                <Routes>
-                    <Route path="/" element={
-                        <div className="container">
-                            <button className="add-car-btn" onClick={() => setShowForm(true)}>
-                                Add Car Listing
-                            </button>
-                            {showForm && (
-                                <AddCarForm
-                                    onClose={() => setShowForm(false)}
-                                    onCarAdded={fetchCars}
-                                />
-                            )}
-                            <SearchBar />
-                            <div className="car-grid">
-                                {cars.map(car => (
-                                    <CarCard
-                                        key={car.id}
-                                        id={car.id}
-                                        image={car.imageUrl}
-                                        title={car.title}
-                                        price={car.price}
-                                        mileage={`${car.mileage?.toLocaleString() || 'N/A'} miles`}
-                                    />
-                                ))}
-                            </div>
-                        </div>
-                    } />
-                    <Route path="/car/:id" element={<CarDetail />} />
-                </Routes>
-                <Footer />
+        <div>
+            <Header />
+            <div className="container">
+                <button className="add-car-btn" onClick={() => setShowForm(true)}>
+                    Add Car Listing
+                </button>
+                {showForm && (
+                    <AddCarForm
+                        onClose={() => setShowForm(false)}
+                        onCarAdded={fetchCars}
+                    />
+                )}
+                <SearchBar />
+                <div className="car-grid">
+                    {cars.map(car => (
+                        <CarCard
+                            key={car.id}
+                            id={car.id}
+                            image={car.imageUrl}
+                            title={car.title}
+                            price={car.price}
+                            mileage={`${car.mileage?.toLocaleString() || 'N/A'} miles`}
+                        />
+                    ))}
+                </div>
             </div>
-        </Router>
+            <Footer />
+        </div>
     );
 };
 
