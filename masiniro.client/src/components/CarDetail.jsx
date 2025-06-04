@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import '../styles/CarDetail.css';
 
+const backendUrl = "http://localhost:5226";
+
 const CarDetail = () => {
     const { id } = useParams();
     const [car, setCar] = useState(null);
@@ -48,7 +50,7 @@ const CarDetail = () => {
             
             <div className="car-detail-content">
                 <div className="car-image-container">
-                    <img src={car.imageUrl} alt={car.title} className="car-detail-image" />
+                    <img src={car.imageUrl && car.imageUrl.startsWith('/images/') ? backendUrl + car.imageUrl : car.imageUrl} alt={car.title} className="car-detail-image" />
                 </div>
                 
                 <div className="car-info">

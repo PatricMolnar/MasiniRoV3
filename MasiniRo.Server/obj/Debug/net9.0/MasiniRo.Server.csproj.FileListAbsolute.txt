@@ -346,3 +346,4 @@ C:\Users\Cobra\Desktop\fac\an3sem2\td\Proiect Td\MasiniRoV3\MasiniRo.Server\obj\
 C:\Users\Cobra\Desktop\fac\an3sem2\td\Proiect Td\MasiniRoV3\MasiniRo.Server\obj\Debug\net9.0\MasiniRo.Server.genruntimeconfig.cache
 C:\Users\Cobra\Desktop\fac\an3sem2\td\Proiect Td\MasiniRoV3\MasiniRo.Server\obj\Debug\net9.0\ref\MasiniRo.Server.dll
 C:\Users\molna\Documents\Anul 3\Sem 2\TD\Proiect\MasiniRo\MasiniRo.Server\obj\Debug\net9.0\MasiniRo.Server.sourcelink.json
+C:\Users\Cobra\Desktop\fac\an3sem2\td\Proiect Td\MasiniRoV3\masiniro.server\bin\Debug\net9.0\MasiniRo.Server.staticwebassets.runtime.json
