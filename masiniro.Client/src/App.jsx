@@ -12,6 +12,7 @@ import Register from "./pages/Register";
 import CarDetail from "./components/CarDetail";
 import Profile from "./pages/Profile";
 import MyListings from "./pages/MyListings";
+import ChatPage from "./pages/ChatPage";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Route path="/car/:id" element={<CarDetail />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/my-listings" element={<MyListings />} />
+          <Route path="/chat" element={<ChatPage />} />
           <Route path="/" element={<Navigate to="/login" replace />} />
         </Routes>
       </Router>

@@ -32,5 +32,19 @@ namespace MasiniRo.Server.Controllers
                 return StatusCode(500, $"An error occurred: {ex.Message}");
             }
         }
+
+        [HttpGet("test-gemini")]
+        public async Task<ActionResult<string>> TestGeminiConnection()
+        {
+            var result = await _chatBotService.TestGeminiApiKey();
+            return Ok(result);
+        }
+
+        [HttpGet("list-models")]
+        public async Task<ActionResult<string>> ListModels()
+        {
+            var result = await _chatBotService.ListGeminiModels();
+            return Ok(result);
+        }
     }
 } 

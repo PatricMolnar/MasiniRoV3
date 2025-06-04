@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from 'react-router-dom';
 import "../styles/CarMarketplace.css";
 import Header from "../components/Header";
 import SearchBar from "../components/SearchBar";
@@ -13,6 +14,8 @@ const CarMarketplace = () => {
   const [searching, setSearching] = useState(false);
   const [error, setError] = useState(null);
   const [showForm, setShowForm] = useState(false);
+
+  const navigate = useNavigate();
 
   const fetchCars = async () => {
     setLoading(true);
@@ -123,6 +126,11 @@ const CarMarketplace = () => {
     fetchCars(); // Refresh all cars and reset filters
   };
 
+  // Function to navigate to the chat page
+  const handleFindCarClick = () => {
+    navigate('/chat');
+  };
+
   if (loading) {
     return <div className="loading">Loading...</div>;
   }
@@ -135,9 +143,14 @@ const CarMarketplace = () => {
     <div>
       <Header />
       <div className="container">
-        <button className="add-car-btn" onClick={() => setShowForm(true)}>
-          Add Car Listing
-        </button>
+        <div className="button-container">
+          <button className="add-car-btn" onClick={() => setShowForm(true)}>
+            Add Car Listing
+          </button>
+          <button className="add-car-btn" onClick={handleFindCarClick}>
+            Find Your Perfect Car
+          </button>
+        </div>
         {showForm && (
           <AddCarForm
             onClose={() => setShowForm(false)}
