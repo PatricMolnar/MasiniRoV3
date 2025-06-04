@@ -1,5 +1,6 @@
 using MasiniRo.Server.Data;
 using Microsoft.EntityFrameworkCore;
+using MasiniRo.Server.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +10,8 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 // Add services to the container.
 builder.Services.AddControllers();
+builder.Services.AddScoped<ChatBotService>();
+builder.Services.AddHttpClient<ChatBotService>();
 
 // Add CORS to allow React frontend to communicate with backend
 builder.Services.AddCors(options =>
@@ -16,7 +19,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy("AllowReactApp",
         policy =>
         {
-            policy.WithOrigins("http://localhost:5173", "https://localhost:5173") // Vite default ports
+            policy.WithOrigins("http://localhost:5173", "https://localhost:5173", "http://localhost:3000")
                    .AllowAnyMethod()
                    .AllowAnyHeader()
                    .AllowCredentials();

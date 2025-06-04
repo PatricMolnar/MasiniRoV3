@@ -3,7 +3,7 @@
 "ServerUrl": "https://localhost:51888",
 "RedirectUrl": "",
 "LaunchCommand": "npm run dev",
-"WorkingDirectory": "C:\\Users\\tudor\\Desktop\\MasiniRoV3-1\\MasiniRo.Server\\..\\masiniro.client",
+"WorkingDirectory": "C:\\Users\\Cobra\\Desktop\\fac\\an3sem2\\td\\Proiect Td\\MasiniRoV3\\masiniro.server\\..\\masiniro.client",
 "MaxTimeoutInSeconds": "120",
 "KeepRunning": "false"
 }
