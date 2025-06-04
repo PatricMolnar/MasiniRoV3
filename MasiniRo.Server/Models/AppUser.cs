@@ -11,5 +11,9 @@ namespace MasiniRo.Server.Models
         public string FirstName { get; set; } = string.Empty;
         public string LastName { get; set; } = string.Empty;
         public string PhoneNumber { get; set; } = string.Empty;
+        public string? ProfilePicturePath { get; set; } = null; // Only this field should be new
+        
+        // Navigation property for user's car listings
+        public virtual ICollection<CarListing> CarListings { get; set; } = new List<CarListing>();
     }
 }
