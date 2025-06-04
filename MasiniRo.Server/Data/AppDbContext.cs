@@ -20,13 +20,13 @@ namespace MasiniRo.Server.Data
                 .HasOne(f => f.User)
                 .WithMany()
                 .HasForeignKey(f => f.UserId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Favorite>()
                 .HasOne(f => f.CarListing)
                 .WithMany()
                 .HasForeignKey(f => f.CarListingId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.Restrict);
 
             // Ensure unique constraint - user can't favorite the same car twice
             modelBuilder.Entity<Favorite>()

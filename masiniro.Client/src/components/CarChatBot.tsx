@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom'; // Assuming you are using React Router
+import { Link } from 'react-router-dom';
+import CarCard from './CarCard.jsx';
 
 const questions = [
     "What is your preferred car type? (e.g., SUV, Sedan, Sports car)",
@@ -10,7 +11,7 @@ const questions = [
     "What is your preferred brand or any specific brands you prefer to avoid?"
 ];
 
-interface Car { // Define a type for car objects
+interface Car {
     id: number;
     title: string;
     brand: string;
@@ -24,16 +25,67 @@ interface Car { // Define a type for car objects
 }
 
 interface CarChatBotProps {
-    filteredCars: Car[]; // Add prop for filtered cars
+    filteredCars: Car[];
 }
 
-const CarChatBot: React.FC<CarChatBotProps> = ({ filteredCars }) => { // Accept filteredCars as a prop
+const CarChatBot: React.FC<CarChatBotProps> = ({ filteredCars }) => {
     const [currentQuestion, setCurrentQuestion] = useState(0);
     const [answers, setAnswers] = useState<string[]>([]);
     const [currentAnswer, setCurrentAnswer] = useState('');
     const [recommendation, setRecommendation] = useState('');
-    const [recommendedCarId, setRecommendedCarId] = useState<number | null>(null); // State for recommended car ID
+    const [recommendedCars, setRecommendedCars] = useState<Car[]>([]);
     const [isLoading, setIsLoading] = useState(false);
+    const [showCarCards, setShowCarCards] = useState(false);
+
+    const parseCarDetailsFromRecommendation = (text: string) => {
+        // Split the text into sections for each car recommendation
+        const carSections = text.split(/\n\s*\n/);
+        
+        return carSections.map(section => {
+            // Remove any car ID references from the section
+            const cleanSection = section.replace(/Car ID: \d+/g, '').trim();
+            
+            // Look for car details in the format:
+            // Brand: [brand]
+            // Model: [model]
+            // Year: [year] (optional)
+            // Price: [price] (optional)
+            const brandMatch = cleanSection.match(/Brand:\s*([^,\n]+)/i);
+            const modelMatch = cleanSection.match(/Model:\s*([^,\n]+)/i);
+            const yearMatch = cleanSection.match(/Year:\s*(\d{4})/i);
+            const priceMatch = cleanSection.match(/Price:\s*\$?(\d+(?:,\d+)*)/i);
+
+            if (brandMatch && modelMatch) {
+                const brand = brandMatch[1].trim();
+                const model = modelMatch[1].trim();
+                const year = yearMatch ? parseInt(yearMatch[1]) : null;
+                const price = priceMatch ? parseInt(priceMatch[1].replace(/,/g, '')) : null;
+
+                // Find matching cars in our inventory
+                const matchingCars = filteredCars.filter(car => {
+                    const brandMatch = car.brand.toLowerCase().includes(brand.toLowerCase());
+                    const modelMatch = car.model.toLowerCase().includes(model.toLowerCase());
+                    const yearMatch = !year || car.year === year;
+                    const priceMatch = !price || Math.abs(car.price - price) <= 5000; // Allow $5000 price difference
+
+                    return brandMatch && modelMatch && yearMatch && priceMatch;
+                });
+
+                if (matchingCars.length > 0) {
+                    // Return the best match (closest price if price was specified)
+                    if (price) {
+                        return matchingCars.reduce((best, current) => {
+                            const bestDiff = Math.abs(best.price - price);
+                            const currentDiff = Math.abs(current.price - price);
+                            return currentDiff < bestDiff ? current : best;
+                        });
+                    }
+                    return matchingCars[0];
+                }
+            }
+            return null;
+        }).filter((car): car is Car => car !== null);
+    };
 
     const handleSubmit = async () => {
         if (currentQuestion < questions.length - 1) {
@@ -42,126 +94,117 @@ const CarChatBot: React.FC<CarChatBotProps> = ({ filteredCars }) => { // Accept 
             setCurrentQuestion(currentQuestion + 1);
         } else {
             setIsLoading(true);
+            setShowCarCards(false);
             try {
                 const allAnswers = [...answers, currentAnswer];
                 const response = await axios.post('api/ChatBot/recommend', allAnswers);
                 const geminiResponseText = response.data;
-                setRecommendation(geminiResponseText);
-                console.log("Recommendation received:", geminiResponseText);
+                
+                // Clean up the recommendation text
+                const cleanRecommendationText = geminiResponseText
+                    .replace(/Car ID: \d+/g, '') // Remove car IDs
+                    .replace(/\*/g, '') // Remove asterisks
+                    .replace(/#/g, '') // Remove hash symbols
+                    .replace(/_/g, '') // Remove underscores
+                    .replace(/\n{3,}/g, '\n\n') // Replace multiple newlines with double newlines
+                    .replace(/^\s+|\s+$/g, '') // Trim whitespace
+                    .split('\n') // Split into lines
+                    .map(line => line.trim()) // Trim each line
+                    .filter(line => line.length > 0) // Remove empty lines
+                    .join('\n'); // Join back with newlines
 
-                // Attempt to parse car details from Gemini's response
-                const carDetails = parseCarDetailsFromRecommendation(geminiResponseText);
+                setRecommendation(cleanRecommendationText);
 
-                if (carDetails) {
-                     // Find the recommended car in the filteredCars list
-                    const foundCar = filteredCars.find(car =>
-                         car.brand.toLowerCase() === carDetails.brand.toLowerCase() &&
-                         car.model.toLowerCase() === carDetails.model.toLowerCase()
-                    );
-
-                    if (foundCar) {
-                        setRecommendedCarId(foundCar.id);
-                        console.log("Matched recommended car ID:", foundCar.id);
-                    } else {
-                         setRecommendedCarId(null);
-                         console.log("Could not match recommended car to a listing.");
-                    }
-                }
-
+                // Get matching cars directly from the parsed recommendations
+                const matchingCars = parseCarDetailsFromRecommendation(cleanRecommendationText);
+                setRecommendedCars(matchingCars);
                 setCurrentQuestion(currentQuestion + 1);
-
+                
+                // Show car cards after a short delay
+                setTimeout(() => {
+                    setShowCarCards(true);
+                }, 1000);
             } catch (error) {
                 console.error('Error getting recommendations:', error);
                 setRecommendation('Sorry, there was an error getting your recommendations. Please try again.');
-                setRecommendedCarId(null);
+                setRecommendedCars([]);
                 setCurrentQuestion(currentQuestion + 1);
             }
             setIsLoading(false);
         }
     };
 
-    // Helper function to parse car details from the recommendation text
-    const parseCarDetailsFromRecommendation = (text: string) => {
-        const idMatch = text.match(/ID:\s*(\d+)/i); // Look for "ID: " followed by digits
-        const brandMatch = text.match(/Brand:\s*([^,\n]+)/i);
-        const modelMatch = text.match(/Model:\s*([^,\n]+)/i);
-        // const yearMatch = text.match(/\b(\d{4})\b/);
-
-        // We prioritize finding the ID now
-        if (idMatch) {
-            const carId = parseInt(idMatch[1]);
-            // Optionally, still try to get other details if needed for display before matching
-             const brand = brandMatch ? brandMatch[1].trim() : 'Unknown Brand';
-             const model = modelMatch ? modelMatch[1].trim() : 'Unknown Model';
-
-            return {
-                id: carId,
-                brand: brand,
-                model: model,
-                year: null // We are not using year for matching anymore
-            };
-        }
-
-        // Fallback to old parsing if ID is not found (less reliable)
-        if (brandMatch && modelMatch) {
-            console.warn("Car ID not found in Gemini response, falling back to parsing brand/model.");
-            return {
-                id: null, // Indicate that ID was not explicitly found
-                brand: brandMatch[1].trim(),
-                model: modelMatch[1].trim(),
-                year: null // Year parsing removed as it's less reliable without ID
-            };
-        }
-
-        return null; // Return null if no details are found
-    };
-
-    // Find the recommended car object based on recommendedCarId
-    const recommendedCar = recommendedCarId !== null
-    ? filteredCars.find(car => car.id === recommendedCarId)
-    : null;
-
     return (
-        <div className="max-w-2xl mx-auto p-4">
-            <div className="bg-white rounded-lg shadow-lg p-6">
-                <h2 className="text-2xl font-bold mb-4">Car Recommendation Chat</h2>
-                
+        <div className="chatbot-container">
+            <div className="chatbot-content">
+                <div className="chatbot-header">
+                    <h2>Car Recommendation Assistant</h2>
+                    <p className="chatbot-subtitle">Let's find your perfect car match</p>
+                </div>
+
                 {currentQuestion < questions.length ? (
-                    <div>
-                        <p className="mb-4">{questions[currentQuestion]}</p>
-                        <div className="flex gap-2">
-                            <input
-                                type="text"
-                                value={currentAnswer}
-                                onChange={(e) => setCurrentAnswer(e.target.value)}
-                                className="flex-1 p-2 border rounded"
-                                placeholder="Type your answer..."
-                            />
-                            <button
-                                onClick={handleSubmit}
-                                className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-                            >
-                                {currentQuestion < questions.length - 1 ? 'Next' : 'Get Recommendations'}
-                            </button>
+                    <div className="chatbot-question-section">
+                        <div className="question-progress">
+                            <div className="progress-bar">
+                                <div 
+                                    className="progress-fill"
+                                    style={{ width: `${((currentQuestion + 1) / questions.length) * 100}%` }}
+                                />
+                            </div>
+                            <span className="progress-text">Question {currentQuestion + 1} of {questions.length}</span>
+                        </div>
+
+                        <div className="question-container">
+                            <p className="question-text">{questions[currentQuestion]}</p>
+                            <div className="answer-input-container">
+                                <input
+                                    type="text"
+                                    value={currentAnswer}
+                                    onChange={(e) => setCurrentAnswer(e.target.value)}
+                                    className="answer-input"
+                                    placeholder="Type your answer..."
+                                    onKeyPress={(e) => e.key === 'Enter' && handleSubmit()}
+                                />
+                                <button
+                                    onClick={handleSubmit}
+                                    className="submit-button"
+                                    disabled={!currentAnswer.trim()}
+                                >
+                                    {currentQuestion < questions.length - 1 ? 'Next' : 'Get Recommendations'}
+                                </button>
+                            </div>
                         </div>
                     </div>
                 ) : (
-                    <div>
+                    <div className="recommendation-section">
                         {isLoading ? (
-                            <p>Getting your recommendations...</p>
+                            <div className="loading-container">
+                                <div className="loading-spinner"></div>
+                                <p>Getting your personalized recommendations...</p>
+                            </div>
                         ) : (
-                            <div>
-                                <h3 className="text-xl font-semibold mb-2">Your Recommendations:</h3>
-                                <div className="whitespace-pre-wrap">{recommendation}</div>
+                            <>
+                                <div className="ai-recommendation-section">
+                                    <h3>AI Recommendations</h3>
+                                    <div className="recommendation-text">{recommendation}</div>
+                                </div>
 
-                                {/* Display recommended car image and details if found */}
-                                {recommendedCar && (
-                                    <div className="recommended-car-display mt-4 p-4 border rounded-lg">
-                                        <h4 className="text-lg font-semibold mb-2">Recommended Car:</h4>
-                                        <img src={recommendedCar.imageUrl?.split(',')[0]} alt={`${recommendedCar.brand} ${recommendedCar.model}`} className="w-full h-48 object-cover rounded-md mb-2" />
-                                        <p className="font-semibold">{recommendedCar.title}</p>
-                                        <p>${recommendedCar.price?.toLocaleString()}</p>
-                                        <Link to={`/car/${recommendedCar.id}`} className="text-blue-500 hover:underline">View Details</Link>
+                                {showCarCards && recommendedCars.length > 0 && (
+                                    <div className="matching-cars-section">
+                                        <h3>Matching Cars in Our Inventory</h3>
+                                        <div className="car-grid">
+                                            {recommendedCars.map((car) => (
+                                                <CarCard
+                                                    key={car.id}
+                                                    id={car.id}
+                                                    imageUrl={car.imageUrl}
+                                                    title={car.title}
+                                                    price={car.price}
+                                                    mileage={0}
+                                                    userId={car.userId}
+                                                />
+                                            ))}
+                                        </div>
                                     </div>
                                 )}
 
@@ -171,13 +214,14 @@ const CarChatBot: React.FC<CarChatBotProps> = ({ filteredCars }) => { // Accept 
                                         setAnswers([]);
                                         setCurrentAnswer('');
                                         setRecommendation('');
-                                        setRecommendedCarId(null);
+                                        setRecommendedCars([]);
+                                        setShowCarCards(false);
                                     }}
-                                    className="mt-4 ml-2 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+                                    className="restart-button"
                                 >
-                                    Start Over
+                                    Start New Search
                                 </button>
-                            </div>
+                            </>
                         )}
                     </div>
                 )}

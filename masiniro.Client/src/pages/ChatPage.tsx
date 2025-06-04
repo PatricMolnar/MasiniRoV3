@@ -54,7 +54,7 @@ const ChatPage: React.FC = () => {
         <div>
             <Header />
             <div className="container">
-                <h1 className="text-2xl font-bold mb-4">Car Recommendation Chat</h1>
+
                 {/* Pass all fetched cars to the CarChatBot */}
                 <CarChatBot filteredCars={allCars} />
             </div>

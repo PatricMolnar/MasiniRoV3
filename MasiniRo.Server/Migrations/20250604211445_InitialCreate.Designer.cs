@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MasiniRo.Server.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250604132948_InitialCreate")]
+    [Migration("20250604211445_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -112,6 +112,33 @@ namespace MasiniRo.Server.Migrations
                     b.ToTable("CarListings");
                 });
 
+            modelBuilder.Entity("MasiniRo.Server.Models.Favorite", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CarListingId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("SavedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CarListingId");
+
+                    b.HasIndex("UserId", "CarListingId")
+                        .IsUnique();
+
+                    b.ToTable("Favorites");
+                });
+
             modelBuilder.Entity("MasiniRo.Server.Models.CarListing", b =>
                 {
                     b.HasOne("MasiniRo.Server.Models.AppUser", "User")
@@ -119,6 +146,25 @@ namespace MasiniRo.Server.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("MasiniRo.Server.Models.Favorite", b =>
+                {
+                    b.HasOne("MasiniRo.Server.Models.CarListing", "CarListing")
+                        .WithMany()
+                        .HasForeignKey("CarListingId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("MasiniRo.Server.Models.AppUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("CarListing");
 
                     b.Navigation("User");
                 });

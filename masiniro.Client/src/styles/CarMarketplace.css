@@ -4,6 +4,18 @@
 /* MAIN MARKETPLACE STYLES */
 /* =================================== */
 
+/* Global unselectable text */
+* {
+  user-select: none;
+}
+
+/* Make input fields selectable */
+input:not([type="submit"]):not([type="button"]),
+textarea,
+[contenteditable="true"] {
+  user-select: text;
+}
+
 .marketplace-container {
   padding: 2rem;
   background-color: #f4f7fa;
@@ -226,14 +238,14 @@
 
 .search-container {
   max-width: 1000px;
-  margin: 2rem auto;
-  padding: 0 1rem;
+  margin: 1.5rem auto;
+  padding: 0 0.5rem;
 }
 
 .large-search-wrapper {
   display: flex;
-  gap: 1rem;
-  margin-bottom: 1rem;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
   align-items: stretch;
 }
 
@@ -245,10 +257,10 @@
   background: white;
   border: 3px solid #d0d7e2;
   border-radius: 16px;
-  padding: 1.25rem 1.5rem;
+  padding: 0.75rem 1rem;
   transition: all 0.3s ease;
   box-shadow: 0 4px 20px rgba(0, 64, 128, 0.08);
-  min-height: 60px;
+  min-height: 55px;
 }
 
 .large-search-input-container:focus-within {
@@ -260,7 +272,7 @@
 .search-icon-large {
   font-size: 1.8rem;
   color: #007acc;
-  margin-right: 1rem;
+  margin-right: 0.75rem;
   transition: transform 0.2s;
 }
 
@@ -277,12 +289,14 @@
   background: transparent;
   padding: 0;
   font-weight: 500;
+  user-select: none;
 }
 
 .large-search-input::placeholder {
   color: #94a3b8;
   font-style: italic;
   font-weight: 400;
+  user-select: none;
 }
 
 .clear-search-btn-large {
@@ -292,7 +306,7 @@
   color: #6c757d;
   cursor: pointer;
   padding: 0;
-  margin-left: 1rem;
+  margin-left: 0.75rem;
   transition: all 0.2s;
   border-radius: 50%;
   width: 40px;
@@ -312,7 +326,7 @@
   background: linear-gradient(135deg, #007acc, #005fa3);
   color: white;
   border: none;
-  padding: 1.25rem 2rem;
+  padding: 0.75rem 1.5rem;
   border-radius: 16px;
   font-size: 1.1rem;
   font-weight: 600;
@@ -320,10 +334,10 @@
   transition: all 0.3s;
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 0.5rem;
   white-space: nowrap;
   box-shadow: 0 4px 20px rgba(0, 122, 204, 0.2);
-  min-height: 60px;
+  min-height: 55px;
 }
 
 .filter-btn-large:hover {
@@ -675,15 +689,25 @@
   justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
-  background-color: #f8f9fa;
-  border-bottom: 1px solid #dee2e6;
+  background: linear-gradient(135deg, #007acc, #005fa3);
+  color: white;
   margin-bottom: 2rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .header-left h1 {
   margin: 0;
-  color: #2c3e50;
-  font-size: 2rem;
+  color: white;
+  font-size: 2.2rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+}
+
+.header-left h1:hover {
+  transform: scale(1.05);
 }
 
 .header-left p {
@@ -699,8 +723,12 @@
 }
 
 .username {
-  font-weight: 500;
-  color: #495057;
+  font-weight: 600;
+  color: white;
+  font-size: 1.1rem;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+  user-select: none;
+  cursor: default;
 }
 
 .profile-btn,
@@ -1314,6 +1342,7 @@
   align-items: center;
   gap: 15px;
   position: relative;
+  user-select: none;
 }
 
 .success-popup-header.warning-header {
@@ -1362,6 +1391,7 @@
   font-weight: 600;
   flex: 1;
   word-wrap: break-word;
+  user-select: none;
 }
 
 .success-close-btn {
@@ -2211,3 +2241,397 @@
     }
   }
 }
+
+/* =================================== */
+/* CAR CHATBOT STYLES */
+/* =================================== */
+
+.chatbot-container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.chatbot-content {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 64, 128, 0.08);
+    overflow: hidden;
+    animation: slideUp 0.3s ease-out;
+    height: auto;
+    min-height: fit-content;
+}
+
+.chatbot-content::-webkit-scrollbar {
+    width: 8px;
+}
+
+.chatbot-content::-webkit-scrollbar-track {
+    background: #f8f9fa;
+    border-radius: 4px;
+}
+
+.chatbot-content::-webkit-scrollbar-thumb {
+    background: #007acc;
+    border-radius: 4px;
+}
+
+.chatbot-content::-webkit-scrollbar-thumb:hover {
+    background: #005fa3;
+}
+
+.chatbot-header {
+    background: linear-gradient(135deg, #007acc, #005fa3);
+    color: white;
+    padding: 1.5rem;
+    border-radius: 8px 8px 0 0;
+    user-select: none;
+}
+
+.chatbot-header h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 600;
+    cursor: default;
+    user-select: none;
+}
+
+.chatbot-subtitle {
+    margin: 0.5rem 0 0;
+    opacity: 0.9;
+    font-size: 1rem;
+    cursor: default;
+    user-select: none;
+}
+
+.question-container {
+    background: #f8f9fa;
+    padding: 1.25rem;
+    border-radius: 8px;
+    border: 2px solid #007acc;
+    margin-bottom: 1rem;
+}
+
+.question-text {
+    font-size: 1.1rem;
+    color: #2c3e50;
+    margin-bottom: 1rem;
+    font-weight: 500;
+    line-height: 1.5;
+}
+
+.answer-input-container {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.answer-input {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    border: 2px solid #007acc;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background: white;
+    color: #2c3e50;
+    min-height: 40px;
+}
+
+.answer-input:focus {
+    outline: none;
+    border-color: #005fa3;
+    box-shadow: 0 0 0 3px rgba(0, 122, 204, 0.15);
+}
+
+.answer-input::placeholder {
+    color: #94a3b8;
+    font-style: italic;
+}
+
+.submit-button {
+    background: linear-gradient(135deg, #007acc, #005fa3);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    white-space: nowrap;
+    min-width: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.submit-button:hover:not(:disabled) {
+    background: linear-gradient(135deg, #005fa3, #004a82);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 122, 204, 0.2);
+}
+
+.submit-button:disabled {
+    background: #6c757d;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.recommendation-section {
+    padding: 1.5rem;
+    min-height: 200px;
+}
+
+.recommendation-text {
+    background: #f8f9fa;
+    padding: 1.25rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+    color: #2c3e50;
+    white-space: pre-wrap;
+    border: 1px solid #007acc;
+}
+
+.all-recommended-cars-section {
+    margin-top: 0;
+    padding: 2rem;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 64, 128, 0.08);
+    width: 100%;
+}
+
+.all-recommended-cars-section h3 {
+    color: #2c3e50;
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    font-weight: 600;
+}
+
+.all-recommended-cars-section .car-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 1.5rem;
+}
+
+@media (max-width: 768px) {
+    .chatbot-container {
+        margin: 1rem auto;
+    }
+
+    .chatbot-content {
+        height: auto;
+        min-height: fit-content;
+    }
+
+    .answer-input-container {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .answer-input {
+        padding: 0.75rem;
+        font-size: 0.95rem;
+        min-height: 35px;
+    }
+
+    .submit-button {
+        width: 100%;
+        padding: 0.75rem;
+        min-width: unset;
+    }
+
+    .question-container {
+        padding: 1rem;
+    }
+
+    .question-text {
+        font-size: 1rem;
+    }
+
+    .chatbot-header {
+        padding: 1.25rem;
+    }
+
+    .chatbot-header h2 {
+        font-size: 1.3rem;
+    }
+
+    .chatbot-subtitle {
+        font-size: 0.9rem;
+    }
+
+    .recommendation-section {
+        padding: 1.25rem;
+    }
+
+    .recommendation-text {
+        padding: 1rem;
+    }
+
+    .all-recommended-cars-section {
+        padding: 1.5rem;
+    }
+
+    .all-recommended-cars-section h3 {
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .all-recommended-cars-section .car-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .chatbot-container {
+        margin: 0.5rem auto;
+    }
+
+    .chatbot-content {
+        height: auto;
+        min-height: fit-content;
+    }
+
+    .answer-input {
+        padding: 0.625rem;
+        font-size: 0.9rem;
+        min-height: 32px;
+    }
+
+    .submit-button {
+        padding: 0.625rem;
+        font-size: 0.95rem;
+    }
+
+    .question-container {
+        padding: 0.875rem;
+    }
+
+    .question-text {
+        font-size: 0.95rem;
+    }
+
+    .chatbot-header {
+        padding: 1rem;
+    }
+
+    .chatbot-header h2 {
+        font-size: 1.2rem;
+    }
+
+    .chatbot-subtitle {
+        font-size: 0.85rem;
+    }
+
+    .recommendation-section {
+        padding: 1rem;
+    }
+
+    .recommendation-text {
+        padding: 0.875rem;
+    }
+
+    .all-recommended-cars-section {
+        padding: 1rem;
+    }
+
+    .all-recommended-cars-section h3 {
+        font-size: 1.3rem;
+        margin-bottom: 1rem;
+    }
+
+    .all-recommended-cars-section .car-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+}
+
+/* Progress Bar Styles */
+.question-progress {
+    margin-bottom: 1.5rem;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 8px;
+    background: #e9ecef;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 0.5rem;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(135deg, #007acc, #005fa3);
+    border-radius: 4px;
+    transition: width 0.3s ease;
+}
+
+.progress-text {
+    display: block;
+    text-align: right;
+    font-size: 0.9rem;
+    color: #6c757d;
+    font-weight: 500;
+}
+
+/* Loading Spinner */
+.loading-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    gap: 1rem;
+}
+
+.loading-spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #007acc;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.loading-container p {
+    color: #2c3e50;
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+.restart-button {
+    background: linear-gradient(135deg, #007acc, #005999);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 2rem auto;
+    display: block;
+    width: fit-content;
+}
+
+.restart-button:hover {
+    background: linear-gradient(135deg, #005999, #004080);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 122, 204, 0.2);
+}
+

@@ -17,10 +17,14 @@ const Header = () => {
     navigate("/login");
   };
 
+  const handleLogoClick = () => {
+    navigate("/marketplace");
+  };
+
   return (
     <header className="header">
       <div className="header-left">
-        <h1>MasiniRo</h1>
+        <h1 onClick={handleLogoClick} style={{ cursor: 'pointer' }}>MasiniRo</h1>
       </div>
 
       <div className="header-right">
