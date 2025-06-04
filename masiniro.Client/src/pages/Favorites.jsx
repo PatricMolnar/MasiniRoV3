@@ -4,41 +4,34 @@ import { useAuth } from "../context/AuthContext";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import SuccessPopup from "../components/SuccessPopup";
-import EditCarForm from "../components/EditCarForm"; // Import the new EditCarForm
 import "../styles/CarMarketplace.css";
 
-const MyListings = () => {
+const Favorites = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
-  const [myListings, setMyListings] = useState([]);
+  const [favorites, setFavorites] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   // Popup states
-  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const [showSuccessPopup, setShowSuccessPopup] = useState(false);
   const [showErrorPopup, setShowErrorPopup] = useState(false);
   const [popupMessage, setPopupMessage] = useState("");
   const [popupTitle, setPopupTitle] = useState("");
-  const [carToDelete, setCarToDelete] = useState(null);
-
-  // Edit states
-  const [showEditForm, setShowEditForm] = useState(false);
-  const [carToEdit, setCarToEdit] = useState(null);
 
   // Backend URL configuration
   const backendUrl = "http://localhost:5226";
 
   useEffect(() => {
     if (user) {
-      fetchMyListings();
+      fetchFavorites();
     }
   }, [user]);
 
-  const fetchMyListings = async () => {
+  const fetchFavorites = async () => {
     try {
       setLoading(true);
-      const response = await fetch(`/api/CarListings/user/${user.id}`, {
+      const response = await fetch(`/api/Favorites/user/${user.id}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("authToken")}`,
         },
@@ -46,9 +39,9 @@ const MyListings = () => {
 
       if (response.ok) {
         const data = await response.json();
-        setMyListings(data);
+        setFavorites(data);
       } else {
-        throw new Error("Failed to fetch your listings");
+        throw new Error("Failed to fetch your favorites");
       }
     } catch (err) {
       setError(err.message);
@@ -57,14 +50,11 @@ const MyListings = () => {
     }
   };
 
-  // FIXED: Updated getImageUrl function with better handling
   const getImageUrl = (imageUrl) => {
     if (!imageUrl) return null;
 
-    // Handle JSON array of images (multiple images)
     let imagePath = imageUrl;
 
-    // If it's a JSON array, get the first image
     try {
       if (imageUrl.startsWith("[") && imageUrl.endsWith("]")) {
         const imageArray = JSON.parse(imageUrl);
@@ -75,74 +65,32 @@ const MyListings = () => {
         }
       }
     } catch (error) {
-      // If JSON parsing fails, use the original imageUrl
       imagePath = imageUrl;
     }
 
-    // Handle different path formats
     if (imagePath.startsWith("/uploads/")) {
       return backendUrl + imagePath;
     }
 
-    // If it's a full URL (http/https), use as is
     if (imagePath.startsWith("http")) {
       return imagePath;
     }
 
-    // Handle legacy /images/ paths
     if (imagePath.startsWith("/images/")) {
       return backendUrl + imagePath;
     }
 
-    // Handle relative paths without leading slash
     if (!imagePath.startsWith("/")) {
       return backendUrl + "/" + imagePath;
     }
 
-    // Default case
     return backendUrl + imagePath;
   };
 
-  const handleEdit = (carId) => {
-    // Find the car data
-    const carData = myListings.find((car) => car.id === carId);
-    if (carData) {
-      setCarToEdit(carData);
-      setShowEditForm(true);
-    } else {
-      setPopupTitle("Error");
-      setPopupMessage("Car data not found. Please refresh and try again.");
-      setShowErrorPopup(true);
-    }
-  };
-
-  const handleEditClose = () => {
-    setShowEditForm(false);
-    setCarToEdit(null);
-  };
-
-  const handleCarUpdated = () => {
-    // Refresh the listings after successful update
-    fetchMyListings();
-  };
-
-  const handleDeleteClick = (carId, carTitle) => {
-    setCarToDelete({ id: carId, title: carTitle });
-    setPopupTitle("Delete Car Listing");
-    setPopupMessage(
-      `Are you sure you want to delete "${carTitle}"? This action cannot be undone.`
-    );
-    setShowDeleteConfirm(true);
-  };
-
-  const handleDeleteConfirm = async () => {
-    setShowDeleteConfirm(false);
-
-    if (!carToDelete) return;
-
+  const handleRemoveFromFavorites = async (carId, carTitle) => {
     try {
       const response = await fetch(
-        `/api/CarListings/${carToDelete.id}?userId=${user.id}`,
+        `/api/Favorites?userId=${user.id}&carListingId=${carId}`,
         {
           method: "DELETE",
           headers: {
@@ -152,49 +100,36 @@ const MyListings = () => {
       );
 
       if (response.ok) {
-        setPopupTitle("Success!");
-        setPopupMessage(
-          `"${carToDelete.title}" has been deleted successfully!`
-        );
+        setPopupTitle("Removed!");
+        setPopupMessage(`"${carTitle}" has been removed from your favorites.`);
         setShowSuccessPopup(true);
-        fetchMyListings(); // Refresh the list
+        fetchFavorites(); // Refresh the list
       } else {
         const error = await response.text();
-        setPopupTitle("Delete Failed");
-        setPopupMessage(`Failed to delete listing: ${error}`);
+        setPopupTitle("Remove Failed");
+        setPopupMessage(`Failed to remove from favorites: ${error}`);
         setShowErrorPopup(true);
       }
     } catch (error) {
-      console.error("Delete error:", error);
+      console.error("Remove favorite error:", error);
       setPopupTitle("Error Occurred");
       setPopupMessage(
-        "An error occurred while deleting the listing. Please try again."
+        "An error occurred while removing from favorites. Please try again."
       );
       setShowErrorPopup(true);
-    } finally {
-      setCarToDelete(null);
     }
-  };
-
-  const handleDeleteCancel = () => {
-    setShowDeleteConfirm(false);
-    setCarToDelete(null);
   };
 
   const handleViewDetails = (carId) => {
     navigate(`/car/${carId}`);
   };
 
+  const handleBackToProfile = () => {
+    navigate("/profile");
+  };
+
   const handleBackToMarketplace = () => {
     navigate("/marketplace");
-  };
-
-  const handleSuccessClose = () => {
-    setShowSuccessPopup(false);
-  };
-
-  const handleErrorClose = () => {
-    setShowErrorPopup(false);
   };
 
   if (loading) {
@@ -202,7 +137,7 @@ const MyListings = () => {
       <div>
         <Header />
         <div className="container">
-          <div className="loading">Loading your listings...</div>
+          <div className="loading">Loading your favorites...</div>
         </div>
         <Footer />
       </div>
@@ -227,43 +162,44 @@ const MyListings = () => {
       <div className="container">
         <div className="my-listings-container">
           <div className="page-header">
-            <h2>My Car Listings</h2>
-            <button className="btn-secondary" onClick={handleBackToMarketplace}>
-              Back to Marketplace
-            </button>
+            <h2>My Favorite Cars ❤️</h2>
+            <div style={{ display: "flex", gap: "1rem" }}>
+              <button className="btn-secondary" onClick={handleBackToProfile}>
+                Back to Profile
+              </button>
+              <button
+                className="btn-secondary"
+                onClick={handleBackToMarketplace}
+              >
+                Browse Cars
+              </button>
+            </div>
           </div>
 
-          {myListings.length === 0 ? (
+          {favorites.length === 0 ? (
             <div className="empty-listings">
-              <h3>You haven't posted any cars yet</h3>
-              <p>Click "Add Car Listing" to post your first car!</p>
+              <h3>No favorite cars yet</h3>
+              <p>Start browsing and save cars you're interested in!</p>
               <button className="btn-primary" onClick={handleBackToMarketplace}>
-                Go to Marketplace
+                Browse Car Marketplace
               </button>
             </div>
           ) : (
             <div className="listings-grid">
-              {myListings.map((car) => {
+              {favorites.map((favorite) => {
+                const car = favorite.car;
                 const imageUrl = getImageUrl(car.imageUrl);
 
                 return (
-                  <div key={car.id} className="listing-card">
+                  <div key={favorite.favoriteId} className="listing-card">
                     <div className="listing-image">
                       {imageUrl ? (
                         <img
                           src={imageUrl}
                           alt={car.title}
                           onError={(e) => {
-                            console.log("❌ Image failed to load:", imageUrl);
-                            console.log("Error event:", e);
                             e.target.style.display = "none";
                             e.target.nextSibling.style.display = "flex";
-                          }}
-                          onLoad={() => {
-                            console.log(
-                              "✅ Image loaded successfully:",
-                              imageUrl
-                            );
                           }}
                         />
                       ) : (
@@ -283,7 +219,6 @@ const MyListings = () => {
                         </div>
                       )}
 
-                      {/* Fallback placeholder that shows on error */}
                       <div
                         className="image-placeholder"
                         style={{
@@ -312,7 +247,7 @@ const MyListings = () => {
                         ${car.price.toLocaleString()}
                       </div>
                       <div className="listing-date">
-                        Posted: {new Date(car.createdAt).toLocaleDateString()}
+                        Saved: {new Date(favorite.savedAt).toLocaleDateString()}
                       </div>
                     </div>
 
@@ -324,16 +259,12 @@ const MyListings = () => {
                         View Details
                       </button>
                       <button
-                        className="btn-edit"
-                        onClick={() => handleEdit(car.id)}
-                      >
-                        Edit
-                      </button>
-                      <button
                         className="btn-delete"
-                        onClick={() => handleDeleteClick(car.id, car.title)}
+                        onClick={() =>
+                          handleRemoveFromFavorites(car.id, car.title)
+                        }
                       >
-                        Delete
+                        Remove ❤️
                       </button>
                     </div>
                   </div>
@@ -345,30 +276,10 @@ const MyListings = () => {
       </div>
       <Footer />
 
-      {/* Edit Car Form Modal */}
-      <EditCarForm
-        isOpen={showEditForm}
-        onClose={handleEditClose}
-        onCarUpdated={handleCarUpdated}
-        carData={carToEdit}
-      />
-
-      {/* Delete Confirmation Popup */}
-      <SuccessPopup
-        isOpen={showDeleteConfirm}
-        onClose={handleDeleteCancel}
-        title={popupTitle}
-        message={popupMessage}
-        buttonText="Delete"
-        cancelButton={true}
-        onCancel={handleDeleteCancel}
-        onConfirm={handleDeleteConfirm}
-      />
-
       {/* Success Popup */}
       <SuccessPopup
         isOpen={showSuccessPopup}
-        onClose={handleSuccessClose}
+        onClose={() => setShowSuccessPopup(false)}
         title={popupTitle}
         message={popupMessage}
         buttonText="Continue"
@@ -377,7 +288,7 @@ const MyListings = () => {
       {/* Error Popup */}
       <SuccessPopup
         isOpen={showErrorPopup}
-        onClose={handleErrorClose}
+        onClose={() => setShowErrorPopup(false)}
         title={popupTitle}
         message={popupMessage}
         buttonText="OK"
@@ -386,4 +297,4 @@ const MyListings = () => {
   );
 };
 
-export default MyListings;
+export default Favorites;

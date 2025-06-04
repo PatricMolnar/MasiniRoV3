@@ -14,6 +14,8 @@ const CarDetail = () => {
   const [error, setError] = useState(null);
   const [showContactPopup, setShowContactPopup] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [isFavorited, setIsFavorited] = useState(false);
+  const [isLoadingSave, setIsLoadingSave] = useState(false);
 
   useEffect(() => {
     const fetchCarDetails = async () => {
@@ -24,6 +26,11 @@ const CarDetail = () => {
         }
         const data = await response.json();
         setCar(data);
+
+        // Check favorite status if user is logged in
+        if (user) {
+          checkFavoriteStatus();
+        }
       } catch (err) {
         setError(err.message);
       } finally {
@@ -32,7 +39,91 @@ const CarDetail = () => {
     };
 
     fetchCarDetails();
-  }, [id]);
+  }, [id, user]);
+
+  const checkFavoriteStatus = async () => {
+    if (!user) return;
+
+    try {
+      const response = await fetch(
+        `/api/Favorites/check?userId=${user.id}&carListingId=${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+          },
+        }
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+        setIsFavorited(data.isFavorited);
+      }
+    } catch (error) {
+      console.error("Error checking favorite status:", error);
+    }
+  };
+
+  const handleSaveToggle = async () => {
+    if (!user) {
+      alert("Please log in to save listings");
+      return;
+    }
+
+    setIsLoadingSave(true);
+
+    try {
+      if (isFavorited) {
+        // Remove from favorites
+        const response = await fetch(
+          `/api/Favorites?userId=${user.id}&carListingId=${id}`,
+          {
+            method: "DELETE",
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+            },
+          }
+        );
+
+        if (response.ok) {
+          setIsFavorited(false);
+        } else {
+          throw new Error("Failed to remove from favorites");
+        }
+      } else {
+        // Add to favorites
+        const response = await fetch("/api/Favorites", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+          },
+          body: JSON.stringify({
+            userId: user.id,
+            carListingId: parseInt(id),
+          }),
+        });
+
+        if (response.ok) {
+          setIsFavorited(true);
+        } else {
+          const errorData = await response.json();
+          if (
+            errorData.message &&
+            errorData.message.includes("already in your favorites")
+          ) {
+            setIsFavorited(true);
+          } else {
+            throw new Error("Failed to add to favorites");
+          }
+        }
+      }
+    } catch (error) {
+      console.error("Error toggling favorite:", error);
+      alert("Failed to update favorites. Please try again.");
+    } finally {
+      setIsLoadingSave(false);
+    }
+  };
 
   // Parse images from JSON string or use single image
   const getCarImages = () => {
@@ -254,7 +345,23 @@ const CarDetail = () => {
                 >
                   Contact Seller
                 </button>
-                <button className="save-button">Save Listing</button>
+                <button
+                  className="save-button"
+                  onClick={handleSaveToggle}
+                  disabled={isLoadingSave}
+                  style={{
+                    background: isFavorited ? "#dc3545" : "#28a745",
+                    color: "white",
+                    opacity: isLoadingSave ? 0.6 : 1,
+                    cursor: isLoadingSave ? "not-allowed" : "pointer",
+                  }}
+                >
+                  {isLoadingSave
+                    ? "..."
+                    : isFavorited
+                    ? "❤️ Saved"
+                    : "🤍 Save Listing"}
+                </button>
               </>
             )}
             {isOwner && (

@@ -20,6 +20,11 @@ const Profile = () => {
     navigate("/my-listings");
   };
 
+  // NEW: Handle favorites navigation
+  const handleMyFavorites = () => {
+    navigate("/favorites");
+  };
+
   const handleEditProfile = () => {
     setShowEditModal(true);
   };
@@ -102,6 +107,10 @@ const Profile = () => {
             </button>
             <button className="btn-secondary" onClick={handleMyListings}>
               My Listings
+            </button>
+            {/* NEW: Favorites button */}
+            <button className="btn-secondary" onClick={handleMyFavorites}>
+              My Favorites ❤️
             </button>
             <button className="btn-secondary" onClick={handleBackToMarketplace}>
               Back to Marketplace

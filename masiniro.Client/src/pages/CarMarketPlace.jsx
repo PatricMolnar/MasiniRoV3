@@ -179,6 +179,7 @@ const CarMarketplace = () => {
                 title={car.title}
                 price={car.price}
                 mileage={`${car.mileage?.toLocaleString() || "N/A"} miles`}
+                userId={car.userId} // NEW: Pass userId to CarCard
               />
             ))}
           </div>

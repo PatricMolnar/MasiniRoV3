@@ -164,7 +164,7 @@ namespace MasiniRo.Server.Controllers
             }
         }
 
-        // PUT: api/CarListings/5 - Update car listing
+        // PUT: api/CarListings/5 - Update car listing (COMPLETE EDIT SUPPORT)
         [HttpPut("{id}")]
         public async Task<IActionResult> PutCarListing(int id, [FromForm] CarListingUpdateDto carListingDto)
         {
@@ -174,13 +174,20 @@ namespace MasiniRo.Server.Controllers
                 
                 if (carListing == null)
                 {
-                    return NotFound();
+                    return NotFound(new { message = "Car listing not found." });
                 }
 
                 // Check ownership
                 if (carListing.UserId != carListingDto.UserId)
                 {
-                    return Forbid("You can only edit your own listings");
+                    return BadRequest(new { message = "You can only edit your own listings." });
+                }
+
+                // Validate the updated data
+                var validationResult = ValidateCarListingUpdateData(carListingDto);
+                if (!validationResult.IsValid)
+                {
+                    return BadRequest(new { message = validationResult.ErrorMessage });
                 }
 
                 // Update basic fields
@@ -191,48 +198,16 @@ namespace MasiniRo.Server.Controllers
                 carListing.Year = carListingDto.Year;
                 carListing.Description = carListingDto.Description;
 
-                // Handle new images if provided
-                if (carListingDto.Images != null && carListingDto.Images.Any())
-                {
-                    // Delete old images
-                    try
-                    {
-                        var oldImagePaths = System.Text.Json.JsonSerializer.Deserialize<List<string>>(carListing.ImageUrl ?? "[]");
-                        foreach (var oldPath in oldImagePaths)
-                        {
-                            DeleteFile(oldPath);
-                        }
-                    }
-                    catch
-                    {
-                        // Continue if old images can't be deleted
-                    }
-
-                    // Validate and save new images
-                    foreach (var image in carListingDto.Images)
-                    {
-                        var imageValidation = ValidateCarImage(image);
-                        if (!imageValidation.IsValid)
-                        {
-                            return BadRequest(new { message = imageValidation.ErrorMessage });
-                        }
-                    }
-
-                    List<string> newImagePaths = new List<string>();
-                    for (int i = 0; i < carListingDto.Images.Count; i++)
-                    {
-                        var imagePath = await SaveCarImage(carListingDto.Images[i], carListingDto.UserId, i);
-                        newImagePaths.Add(imagePath);
-                    }
-
-                    carListing.ImageUrl = System.Text.Json.JsonSerializer.Serialize(newImagePaths);
-                }
+                // Handle image updates
+                await HandleImageUpdates(carListing, carListingDto);
 
                 await _context.SaveChangesAsync();
-                return NoContent();
+                
+                return Ok(new { message = "Car listing updated successfully!" });
             }
             catch (Exception ex)
             {
+                Console.WriteLine($"Error updating car listing: {ex.Message}");
                 return StatusCode(500, new { message = $"Failed to update car listing: {ex.Message}" });
             }
         }
@@ -250,7 +225,7 @@ namespace MasiniRo.Server.Controllers
             // Check ownership
             if (carListing.UserId != userId)
             {
-                return Forbid("You can only delete your own listings");
+                return BadRequest(new { message = "You can only delete your own listings." });
             }
 
             // Delete associated images
@@ -277,6 +252,101 @@ namespace MasiniRo.Server.Controllers
         private bool CarListingExists(int id)
         {
             return _context.CarListings.Any(e => e.Id == id);
+        }
+
+        // COMPLETE IMAGE UPDATE HANDLING
+        private async Task HandleImageUpdates(CarListing carListing, CarListingUpdateDto carListingDto)
+        {
+            // Get current images
+            List<string> currentImages = new List<string>();
+            try
+            {
+                currentImages = System.Text.Json.JsonSerializer.Deserialize<List<string>>(carListing.ImageUrl ?? "[]") ?? new List<string>();
+            }
+            catch
+            {
+                currentImages = new List<string>();
+            }
+
+            List<string> finalImages = new List<string>();
+
+            // Handle keeping existing images
+            if (!string.IsNullOrWhiteSpace(carListingDto.KeepExistingImages))
+            {
+                try
+                {
+                    var imagesToKeep = System.Text.Json.JsonSerializer.Deserialize<List<string>>(carListingDto.KeepExistingImages);
+                    if (imagesToKeep != null)
+                    {
+                        // Only keep images that actually exist in current images
+                        finalImages.AddRange(imagesToKeep.Where(img => currentImages.Contains(img)));
+                        
+                        // Delete images that are being removed
+                        var imagesToDelete = currentImages.Except(imagesToKeep).ToList();
+                        foreach (var imageToDelete in imagesToDelete)
+                        {
+                            DeleteFile(imageToDelete);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error processing kept images: {ex.Message}");
+                    // If there's an error parsing, keep all current images
+                    finalImages.AddRange(currentImages);
+                }
+            }
+            // If new images are being uploaded, replace all images
+            else if (carListingDto.Images != null && carListingDto.Images.Any())
+            {
+                // Delete all old images
+                foreach (var oldImage in currentImages)
+                {
+                    DeleteFile(oldImage);
+                }
+                finalImages.Clear();
+            }
+            // If no changes specified, keep existing images
+            else
+            {
+                finalImages.AddRange(currentImages);
+            }
+
+            // Add new images if provided
+            if (carListingDto.Images != null && carListingDto.Images.Any())
+            {
+                // Validate new images
+                foreach (var image in carListingDto.Images)
+                {
+                    var imageValidation = ValidateCarImage(image);
+                    if (!imageValidation.IsValid)
+                    {
+                        throw new Exception(imageValidation.ErrorMessage);
+                    }
+                }
+
+                // Check total image count
+                if (finalImages.Count + carListingDto.Images.Count > 6)
+                {
+                    throw new Exception("Total images cannot exceed 6. Please remove some existing images first.");
+                }
+
+                // Save new images
+                for (int i = 0; i < carListingDto.Images.Count; i++)
+                {
+                    var imagePath = await SaveCarImage(carListingDto.Images[i], carListingDto.UserId, finalImages.Count + i);
+                    finalImages.Add(imagePath);
+                }
+            }
+
+            // Ensure we have at least one image
+            if (!finalImages.Any())
+            {
+                throw new Exception("At least one image is required for the car listing.");
+            }
+
+            // Update the car listing with final images
+            carListing.ImageUrl = System.Text.Json.JsonSerializer.Serialize(finalImages);
         }
 
         // VALIDATION METHODS
@@ -309,6 +379,32 @@ namespace MasiniRo.Server.Controllers
             return new SimpleValidationResult(true, null);
         }
 
+        private SimpleValidationResult ValidateCarListingUpdateData(CarListingUpdateDto dto)
+        {
+            if (string.IsNullOrWhiteSpace(dto.Title) || dto.Title.Length < 5)
+                return new SimpleValidationResult(false, "Title must be at least 5 characters long.");
+
+            if (dto.Title.Length > 100)
+                return new SimpleValidationResult(false, "Title cannot exceed 100 characters.");
+
+            if (string.IsNullOrWhiteSpace(dto.Brand))
+                return new SimpleValidationResult(false, "Brand is required.");
+
+            if (string.IsNullOrWhiteSpace(dto.Model))
+                return new SimpleValidationResult(false, "Model is required.");
+
+            if (dto.Price <= 0)
+                return new SimpleValidationResult(false, "Price must be greater than 0.");
+
+            if (dto.Year < 1900 || dto.Year > DateTime.Now.Year + 1)
+                return new SimpleValidationResult(false, $"Year must be between 1900 and {DateTime.Now.Year + 1}.");
+
+            if (string.IsNullOrWhiteSpace(dto.Description))
+                return new SimpleValidationResult(false, "Description is required.");
+
+            return new SimpleValidationResult(true, null);
+        }
+
         private SimpleValidationResult ValidateCarImage(IFormFile file)
         {
             // Check file size (10MB max)
@@ -335,7 +431,7 @@ namespace MasiniRo.Server.Controllers
 
             // Generate filename
             var fileExtension = Path.GetExtension(file.FileName).ToLower();
-            var fileName = $"car_{userId}_{DateTime.Now:yyyyMMddHHmmss}_{imageIndex}{fileExtension}";
+            var fileName = $"car_{userId}_{DateTime.Now:yyyyMMddHHmmss}_{imageIndex}_{Guid.NewGuid().ToString("N")[..8]}{fileExtension}";
             var filePath = Path.Combine(uploadsDir, fileName);
 
             // Save file
@@ -357,11 +453,12 @@ namespace MasiniRo.Server.Controllers
                 if (System.IO.File.Exists(fullPath))
                 {
                     System.IO.File.Delete(fullPath);
+                    Console.WriteLine($"Deleted file: {fullPath}");
                 }
             }
-            catch
+            catch (Exception ex)
             {
-                // Ignore file deletion errors
+                Console.WriteLine($"Failed to delete file {filePath}: {ex.Message}");
             }
         }
     }
@@ -389,6 +486,9 @@ namespace MasiniRo.Server.Controllers
         public string Description { get; set; }
         public int UserId { get; set; }
         public List<IFormFile>? Images { get; set; } = new List<IFormFile>();
+        
+        // NEW: Support for keeping existing images
+        public string? KeepExistingImages { get; set; } // JSON string of image paths to keep
     }
 
     // SIMPLE VALIDATION CLASS

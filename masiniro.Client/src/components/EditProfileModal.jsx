@@ -327,7 +327,7 @@ const EditProfileModal = ({ isOpen, onClose, onProfileUpdated }) => {
                         className="remove-image-btn"
                         onClick={handleRemoveProfilePicture}
                       >
-                        ✕ Remove
+                        ✕
                       </button>
                     </div>
                   </div>

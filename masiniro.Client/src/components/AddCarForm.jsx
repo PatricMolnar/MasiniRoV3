@@ -213,15 +213,70 @@ const AddCarForm = ({ onClose, onCarAdded }) => {
           <div className="form-row">
             <div className="form-group">
               <label htmlFor="brand">Brand *</label>
-              <input
-                type="text"
+              <select
                 id="brand"
                 name="brand"
                 value={formData.brand}
                 onChange={handleChange}
                 required
-                placeholder="e.g., BMW"
-              />
+                className="brand-dropdown"
+              >
+                <option value="">Select a brand</option>
+                <option value="Audi">Audi</option>
+                <option value="BMW">BMW</option>
+                <option value="Mercedes-Benz">Mercedes-Benz</option>
+                <option value="Volkswagen">Volkswagen</option>
+                <option value="Toyota">Toyota</option>
+                <option value="Honda">Honda</option>
+                <option value="Ford">Ford</option>
+                <option value="Chevrolet">Chevrolet</option>
+                <option value="Nissan">Nissan</option>
+                <option value="Hyundai">Hyundai</option>
+                <option value="Kia">Kia</option>
+                <option value="Mazda">Mazda</option>
+                <option value="Subaru">Subaru</option>
+                <option value="Lexus">Lexus</option>
+                <option value="Infiniti">Infiniti</option>
+                <option value="Acura">Acura</option>
+                <option value="Volvo">Volvo</option>
+                <option value="Porsche">Porsche</option>
+                <option value="Jaguar">Jaguar</option>
+                <option value="Land Rover">Land Rover</option>
+                <option value="Jeep">Jeep</option>
+                <option value="Chrysler">Chrysler</option>
+                <option value="Dodge">Dodge</option>
+                <option value="Cadillac">Cadillac</option>
+                <option value="Lincoln">Lincoln</option>
+                <option value="Buick">Buick</option>
+                <option value="GMC">GMC</option>
+                <option value="Tesla">Tesla</option>
+                <option value="Genesis">Genesis</option>
+                <option value="Alfa Romeo">Alfa Romeo</option>
+                <option value="Maserati">Maserati</option>
+                <option value="Bentley">Bentley</option>
+                <option value="Rolls-Royce">Rolls-Royce</option>
+                <option value="Ferrari">Ferrari</option>
+                <option value="Lamborghini">Lamborghini</option>
+                <option value="McLaren">McLaren</option>
+                <option value="Aston Martin">Aston Martin</option>
+                <option value="Bugatti">Bugatti</option>
+                <option value="Koenigsegg">Koenigsegg</option>
+                <option value="Pagani">Pagani</option>
+                <option value="Dacia">Dacia</option>
+                <option value="Renault">Renault</option>
+                <option value="Peugeot">Peugeot</option>
+                <option value="Citroën">Citroën</option>
+                <option value="Fiat">Fiat</option>
+                <option value="Mitsubishi">Mitsubishi</option>
+                <option value="Suzuki">Suzuki</option>
+                <option value="Isuzu">Isuzu</option>
+                <option value="Saab">Saab</option>
+                <option value="Skoda">Skoda</option>
+                <option value="SEAT">SEAT</option>
+                <option value="Smart">Smart</option>
+                <option value="Mini">Mini</option>
+                <option value="Other">Other</option>
+              </select>
             </div>
             <div className="form-group">
               <label htmlFor="model">Model *</label>
