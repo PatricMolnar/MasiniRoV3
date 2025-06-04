@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MasiniRo.Server")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4125b3129f32ed3a35e52f4cef81def350123e0a")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+63cbf1def99e678112664aa8e8e2a5f6989c41b9")]
 [assembly: System.Reflection.AssemblyProductAttribute("MasiniRo.Server")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MasiniRo.Server")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

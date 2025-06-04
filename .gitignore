@@ -14,3 +14,6 @@ MasiniRo.Server/bin/Debug/net9.0/MasiniRo.Server.pdb
 /.vs
 MasiniRo.Server/bin/Debug/net9.0/MasiniRo.Server.dll
 /MasiniRo.Server/bin
+/MasiniRo.Server/obj/Debug
+/MasiniRo.Server/obj
+/MasiniRo.Server/obj

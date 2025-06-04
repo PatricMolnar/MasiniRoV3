@@ -22,12 +22,6 @@ C:\Users\molna\Documents\Anul 3\Sem 2\TD\Proiect\MasiniRo\MasiniRo.Server\obj\De
 C:\Users\molna\Documents\Anul 3\Sem 2\TD\Proiect\MasiniRo\MasiniRo.Server\obj\Debug\net9.0\staticwebassets.build.json
 C:\Users\molna\Documents\Anul 3\Sem 2\TD\Proiect\MasiniRo\MasiniRo.Server\obj\Debug\net9.0\staticwebassets.development.json
 C:\Users\molna\Documents\Anul 3\Sem 2\TD\Proiect\MasiniRo\MasiniRo.Server\obj\Debug\net9.0\staticwebassets.build.endpoints.json
-C:\Users\molna\Documents\Anul 3\Sem 2\TD\Proiect\MasiniRo\MasiniRo.Server\obj\Debug\net9.0\staticwebassets\msbuild.MasiniRo.Server.Microsoft.AspNetCore.StaticWebAssets.props
-C:\Users\molna\Documents\Anul 3\Sem 2\TD\Proiect\MasiniRo\MasiniRo.Server\obj\Debug\net9.0\staticwebassets\msbuild.MasiniRo.Server.Microsoft.AspNetCore.StaticWebAssetEndpoints.props
-C:\Users\molna\Documents\Anul 3\Sem 2\TD\Proiect\MasiniRo\MasiniRo.Server\obj\Debug\net9.0\staticwebassets\msbuild.build.MasiniRo.Server.props
-C:\Users\molna\Documents\Anul 3\Sem 2\TD\Proiect\MasiniRo\MasiniRo.Server\obj\Debug\net9.0\staticwebassets\msbuild.buildMultiTargeting.MasiniRo.Server.props
-C:\Users\molna\Documents\Anul 3\Sem 2\TD\Proiect\MasiniRo\MasiniRo.Server\obj\Debug\net9.0\staticwebassets\msbuild.buildTransitive.MasiniRo.Server.props
-C:\Users\molna\Documents\Anul 3\Sem 2\TD\Proiect\MasiniRo\MasiniRo.Server\obj\Debug\net9.0\staticwebassets.pack.json
 C:\Users\molna\Documents\Anul 3\Sem 2\TD\Proiect\MasiniRo\MasiniRo.Server\obj\Debug\net9.0\MasiniRo.AEE952A8.Up2Date
 C:\Users\molna\Documents\Anul 3\Sem 2\TD\Proiect\MasiniRo\MasiniRo.Server\obj\Debug\net9.0\MasiniRo.Server.dll
 C:\Users\molna\Documents\Anul 3\Sem 2\TD\Proiect\MasiniRo\MasiniRo.Server\obj\Debug\net9.0\refint\MasiniRo.Server.dll
@@ -86,13 +80,11 @@ C:\Users\molna\Documents\Anul 3\Sem 2\TD\Proiect\MasiniRo\MasiniRo.Server\bin\De
 C:\Users\molna\Documents\Anul 3\Sem 2\TD\Proiect\MasiniRo\MasiniRo.Server\bin\Debug\net9.0\System.Composition.TypedParts.dll
 C:\Users\molna\Documents\Anul 3\Sem 2\TD\Proiect\MasiniRo\MasiniRo.Server\bin\Debug\net9.0\System.Configuration.ConfigurationManager.dll
 C:\Users\molna\Documents\Anul 3\Sem 2\TD\Proiect\MasiniRo\MasiniRo.Server\bin\Debug\net9.0\System.Drawing.Common.dll
-C:\Users\molna\Documents\Anul 3\Sem 2\TD\Proiect\MasiniRo\MasiniRo.Server\bin\Debug\net9.0\System.Formats.Asn1.dll
 C:\Users\molna\Documents\Anul 3\Sem 2\TD\Proiect\MasiniRo\MasiniRo.Server\bin\Debug\net9.0\System.IdentityModel.Tokens.Jwt.dll
 C:\Users\molna\Documents\Anul 3\Sem 2\TD\Proiect\MasiniRo\MasiniRo.Server\bin\Debug\net9.0\System.Memory.Data.dll
 C:\Users\molna\Documents\Anul 3\Sem 2\TD\Proiect\MasiniRo\MasiniRo.Server\bin\Debug\net9.0\System.Runtime.Caching.dll
 C:\Users\molna\Documents\Anul 3\Sem 2\TD\Proiect\MasiniRo\MasiniRo.Server\bin\Debug\net9.0\System.Security.Cryptography.ProtectedData.dll
 C:\Users\molna\Documents\Anul 3\Sem 2\TD\Proiect\MasiniRo\MasiniRo.Server\bin\Debug\net9.0\System.Security.Permissions.dll
-C:\Users\molna\Documents\Anul 3\Sem 2\TD\Proiect\MasiniRo\MasiniRo.Server\bin\Debug\net9.0\System.Text.Json.dll
 C:\Users\molna\Documents\Anul 3\Sem 2\TD\Proiect\MasiniRo\MasiniRo.Server\bin\Debug\net9.0\System.Windows.Extensions.dll
 C:\Users\molna\Documents\Anul 3\Sem 2\TD\Proiect\MasiniRo\MasiniRo.Server\bin\Debug\net9.0\cs\Microsoft.CodeAnalysis.resources.dll
 C:\Users\molna\Documents\Anul 3\Sem 2\TD\Proiect\MasiniRo\MasiniRo.Server\bin\Debug\net9.0\de\Microsoft.CodeAnalysis.resources.dll
@@ -347,3 +339,5 @@ C:\Users\Cobra\Desktop\fac\an3sem2\td\Proiect Td\MasiniRoV3\MasiniRo.Server\obj\
 C:\Users\Cobra\Desktop\fac\an3sem2\td\Proiect Td\MasiniRoV3\MasiniRo.Server\obj\Debug\net9.0\ref\MasiniRo.Server.dll
 C:\Users\molna\Documents\Anul 3\Sem 2\TD\Proiect\MasiniRo\MasiniRo.Server\obj\Debug\net9.0\MasiniRo.Server.sourcelink.json
 C:\Users\Cobra\Desktop\fac\an3sem2\td\Proiect Td\MasiniRoV3\masiniro.server\bin\Debug\net9.0\MasiniRo.Server.staticwebassets.runtime.json
+C:\Users\molna\Documents\Anul 3\Sem 2\TD\Proiect\MasiniRo\masiniro.server\bin\Debug\net9.0\MasiniRo.Server.staticwebassets.runtime.json
+C:\Users\molna\Documents\Anul 3\Sem 2\TD\Proiect\MasiniRo\masiniro.server\obj\Debug\net9.0\staticwebassets.build.json.cache
