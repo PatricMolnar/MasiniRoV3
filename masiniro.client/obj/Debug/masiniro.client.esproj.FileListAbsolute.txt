@@ -1,2 +1,0 @@
-C:\Users\molna\Documents\Anul 3\Sem 2\TD\Proiect\MasiniRo\masiniro.client\obj\Debug\masiniro.client.esproj.CoreCompileInputs.cache
-C:\Users\Cobra\Desktop\fac\an3sem2\td\Proiect Td\MasiniRoV3\masiniro.client\obj\Debug\masiniro.client.esproj.CoreCompileInputs.cache
