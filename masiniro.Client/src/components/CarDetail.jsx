@@ -313,21 +313,27 @@ const CarDetail = () => {
         </div>
 
         <div className="car-info">
+          <h1>{car.title}</h1>
           <div className="car-specs">
-            <h2>Specifications</h2>
-            <div className="specs-grid">
-              <div className="spec-item">
-                <span className="spec-label">Brand</span>
-                <span className="spec-value">{car.brand}</span>
-              </div>
-              <div className="spec-item">
-                <span className="spec-label">Model</span>
-                <span className="spec-value">{car.model}</span>
-              </div>
-              <div className="spec-item">
-                <span className="spec-label">Year</span>
-                <span className="spec-value">{car.year}</span>
-              </div>
+            <div className="spec-item">
+              <span className="spec-label">Brand:</span>
+              <span className="spec-value">{car.brand}</span>
+            </div>
+            <div className="spec-item">
+              <span className="spec-label">Model:</span>
+              <span className="spec-value">{car.model}</span>
+            </div>
+            <div className="spec-item">
+              <span className="spec-label">Year:</span>
+              <span className="spec-value">{car.year}</span>
+            </div>
+            <div className="spec-item">
+              <span className="spec-label">Mileage:</span>
+              <span className="spec-value">{car.mileage ? `${car.mileage.toLocaleString()} km` : "N/A"}</span>
+            </div>
+            <div className="spec-item">
+              <span className="spec-label">Price:</span>
+              <span className="spec-value price">${car.price.toLocaleString()}</span>
             </div>
           </div>
 

@@ -34,6 +34,7 @@ namespace MasiniRo.Server.Controllers
                     c.Model,
                     c.Price,
                     c.Year,
+                    c.Mileage,
                     c.Description,
                     c.ImageUrl,
                     c.CreatedAt,
@@ -61,6 +62,7 @@ namespace MasiniRo.Server.Controllers
                     c.Model,
                     c.Price,
                     c.Year,
+                    c.Mileage,
                     c.Description,
                     c.ImageUrl,
                     c.CreatedAt,
@@ -93,6 +95,7 @@ namespace MasiniRo.Server.Controllers
                     c.Model,
                     c.Price,
                     c.Year,
+                    c.Mileage,
                     c.Description,
                     c.ImageUrl,
                     c.CreatedAt,
@@ -147,6 +150,7 @@ namespace MasiniRo.Server.Controllers
                     Model = carListingDto.Model,
                     Price = carListingDto.Price,
                     Year = carListingDto.Year,
+                    Mileage = carListingDto.Mileage,
                     Description = carListingDto.Description,
                     ImageUrl = System.Text.Json.JsonSerializer.Serialize(imagePaths),
                     UserId = carListingDto.UserId,
@@ -196,6 +200,7 @@ namespace MasiniRo.Server.Controllers
                 carListing.Model = carListingDto.Model;
                 carListing.Price = carListingDto.Price;
                 carListing.Year = carListingDto.Year;
+                carListing.Mileage = carListingDto.Mileage;
                 carListing.Description = carListingDto.Description;
 
                 // Handle image updates
@@ -370,6 +375,9 @@ namespace MasiniRo.Server.Controllers
             if (dto.Year < 1900 || dto.Year > DateTime.Now.Year + 1)
                 return new SimpleValidationResult(false, $"Year must be between 1900 and {DateTime.Now.Year + 1}.");
 
+            if (dto.Mileage < 0)
+                return new SimpleValidationResult(false, "Mileage cannot be negative.");
+
             if (string.IsNullOrWhiteSpace(dto.Description))
                 return new SimpleValidationResult(false, "Description is required.");
 
@@ -398,6 +406,9 @@ namespace MasiniRo.Server.Controllers
 
             if (dto.Year < 1900 || dto.Year > DateTime.Now.Year + 1)
                 return new SimpleValidationResult(false, $"Year must be between 1900 and {DateTime.Now.Year + 1}.");
+
+            if (dto.Mileage < 0)
+                return new SimpleValidationResult(false, "Mileage cannot be negative.");
 
             if (string.IsNullOrWhiteSpace(dto.Description))
                 return new SimpleValidationResult(false, "Description is required.");
@@ -471,6 +482,7 @@ namespace MasiniRo.Server.Controllers
         public string Model { get; set; }
         public decimal Price { get; set; }
         public int Year { get; set; }
+        public int Mileage { get; set; }
         public string Description { get; set; }
         public int UserId { get; set; }
         public List<IFormFile>? Images { get; set; } = new List<IFormFile>();
@@ -483,6 +495,7 @@ namespace MasiniRo.Server.Controllers
         public string Model { get; set; }
         public decimal Price { get; set; }
         public int Year { get; set; }
+        public int Mileage { get; set; }
         public string Description { get; set; }
         public int UserId { get; set; }
         public List<IFormFile>? Images { get; set; } = new List<IFormFile>();

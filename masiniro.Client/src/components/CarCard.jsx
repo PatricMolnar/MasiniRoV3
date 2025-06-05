@@ -251,7 +251,7 @@ const CarCard = ({ id, imageUrl, title, price, mileage, userId }) => {
       <div className="car-details">
         <h3>{title}</h3>
         <p>Price: ${price.toLocaleString()}</p>
-        <p>Mileage: {mileage}</p>
+        <p>Mileage: {mileage ? `${mileage.toLocaleString()} km` : "N/A"}</p>
         <div style={{ display: "flex", gap: "0.5rem", marginTop: "1rem" }}>
           <Link
             to={`/car/${id}`}

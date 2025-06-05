@@ -6,12 +6,14 @@ const EditCarForm = ({ isOpen, onClose, onCarUpdated, carData }) => {
   const { user } = useAuth();
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
-    title: "",
-    brand: "",
-    model: "",
-    price: "",
-    year: "",
-    description: "",
+    title: carData?.title || "",
+    brand: carData?.brand || "",
+    model: carData?.model || "",
+    price: carData?.price || "",
+    year: carData?.year || "",
+    mileage: carData?.mileage || "",
+    description: carData?.description || "",
+    images: [],
   });
 
   const [selectedImages, setSelectedImages] = useState([]);
@@ -32,6 +34,7 @@ const EditCarForm = ({ isOpen, onClose, onCarUpdated, carData }) => {
         model: carData.model || "",
         price: carData.price?.toString() || "",
         year: carData.year?.toString() || "",
+        mileage: carData.mileage || "",
         description: carData.description || "",
       });
 
@@ -185,6 +188,7 @@ const EditCarForm = ({ isOpen, onClose, onCarUpdated, carData }) => {
       formDataToSend.append("model", formData.model);
       formDataToSend.append("price", parseFloat(formData.price));
       formDataToSend.append("year", parseInt(formData.year));
+      formDataToSend.append("mileage", parseInt(formData.mileage));
       formDataToSend.append("description", formData.description);
       formDataToSend.append("userId", user.id);
 
@@ -397,8 +401,23 @@ const EditCarForm = ({ isOpen, onClose, onCarUpdated, carData }) => {
                   onChange={handleChange}
                   required
                   min="1900"
-                  max="2025"
+                  max={new Date().getFullYear() + 1}
                   placeholder="2018"
+                />
+              </div>
+            </div>
+
+            <div className="form-row">
+              <div className="form-group">
+                <label htmlFor="mileage">Mileage (km):</label>
+                <input
+                  type="number"
+                  id="mileage"
+                  name="mileage"
+                  value={formData.mileage}
+                  onChange={handleChange}
+                  min="0"
+                  required
                 />
               </div>
             </div>

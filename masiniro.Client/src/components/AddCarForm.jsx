@@ -11,7 +11,9 @@ const AddCarForm = ({ onClose, onCarAdded }) => {
     model: "",
     price: "",
     year: "",
+    mileage: "",
     description: "",
+    images: [],
   });
 
   const [selectedImages, setSelectedImages] = useState([]);
@@ -126,6 +128,7 @@ const AddCarForm = ({ onClose, onCarAdded }) => {
       formDataToSend.append("model", formData.model);
       formDataToSend.append("price", parseFloat(formData.price));
       formDataToSend.append("year", parseInt(formData.year));
+      formDataToSend.append("mileage", parseInt(formData.mileage));
       formDataToSend.append("description", formData.description);
       formDataToSend.append("userId", user.id);
 
@@ -317,8 +320,24 @@ const AddCarForm = ({ onClose, onCarAdded }) => {
                 onChange={handleChange}
                 required
                 min="1900"
-                max="2025"
+                max={new Date().getFullYear() + 1}
                 placeholder="2018"
+              />
+            </div>
+          </div>
+
+          <div className="form-row">
+            <div className="form-group">
+              <label htmlFor="mileage">Mileage (km):</label>
+              <input
+                type="number"
+                id="mileage"
+                name="mileage"
+                value={formData.mileage}
+                onChange={handleChange}
+                min="0"
+                placeholder="10000 km"
+                required
               />
             </div>
           </div>

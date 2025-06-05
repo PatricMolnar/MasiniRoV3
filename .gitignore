@@ -32,3 +32,4 @@ MasiniRo.Server/appsettings.*.json
 *.userosscache
 *.sln.docstates
 /presentation
+/MasiniRo.Server/bin
