@@ -11,6 +11,7 @@ const CarCard = ({ id, imageUrl, title, price, mileage, userId }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isFavorited, setIsFavorited] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [imageLoadError, setImageLoadError] = useState(false);
 
   // Check if this is the user's own listing
   const isOwnListing = user && userId && user.id === userId;
@@ -135,7 +136,7 @@ const CarCard = ({ id, imageUrl, title, price, mileage, userId }) => {
       }
     }
   } catch (error) {
-    // If JSON parsing fails, treat as single image
+    console.error('Error parsing image URLs:', error);
     images = imageUrl ? [imageUrl] : [];
   }
 
@@ -143,23 +144,37 @@ const CarCard = ({ id, imageUrl, title, price, mileage, userId }) => {
   const getImageUrl = (imagePath) => {
     if (!imagePath) return null;
 
-    // If it starts with /uploads/, prepend backend URL
-    if (imagePath.startsWith("/uploads/")) {
-      return backendUrl + imagePath;
-    }
+    try {
+      // If it starts with /uploads/, prepend backend URL
+      if (imagePath.startsWith("/uploads/")) {
+        return backendUrl + imagePath;
+      }
 
-    // If it's a full URL (http/https), use as is
-    if (imagePath.startsWith("http")) {
+      // If it's a full URL (http/https), use as is
+      if (imagePath.startsWith("http")) {
+        return imagePath;
+      }
+
+      // If it starts with /images/, prepend backend URL (legacy support)
+      if (imagePath.startsWith("/images/")) {
+        return backendUrl + imagePath;
+      }
+
+      // Default case
       return imagePath;
+    } catch (error) {
+      console.error('Error processing image URL:', error);
+      return null;
     }
+  };
 
-    // If it starts with /images/, prepend backend URL (legacy support)
-    if (imagePath.startsWith("/images/")) {
-      return backendUrl + imagePath;
+  const handleImageError = (e) => {
+    console.warn(`Failed to load image for car ${id}:`, e);
+    setImageLoadError(true);
+    e.target.style.display = "none";
+    if (e.target.nextSibling) {
+      e.target.nextSibling.style.display = "flex";
     }
-
-    // Default case
-    return imagePath;
   };
 
   const nextImage = (e) => {
@@ -174,21 +189,18 @@ const CarCard = ({ id, imageUrl, title, price, mileage, userId }) => {
     setCurrentImageIndex((prev) => (prev - 1 + images.length) % images.length);
   };
 
-  const currentImage =
-    images.length > 0 ? getImageUrl(images[currentImageIndex]) : null;
+  const currentImage = images.length > 0 ? getImageUrl(images[currentImageIndex]) : null;
 
   return (
     <div className="car-card">
       <div className="car-image-container">
-        {currentImage ? (
+        {currentImage && !imageLoadError ? (
           <>
             <img
               src={currentImage}
               alt={title}
-              onError={(e) => {
-                e.target.style.display = "none";
-                e.target.nextSibling.style.display = "flex";
-              }}
+              onError={handleImageError}
+              loading="lazy"
             />
             <div className="image-placeholder" style={{ display: "none" }}>
               📷 Image not available
@@ -224,6 +236,7 @@ const CarCard = ({ id, imageUrl, title, price, mileage, userId }) => {
                         e.preventDefault();
                         e.stopPropagation();
                         setCurrentImageIndex(index);
+                        setImageLoadError(false);
                       }}
                     />
                   ))}
