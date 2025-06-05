@@ -38,9 +38,37 @@ const CarChatBot: React.FC<CarChatBotProps> = ({ filteredCars }) => {
     const [showCarCards, setShowCarCards] = useState(false);
 
     const extractCarIds = (text: string): number[] => {
-        const carIdRegex = /Car ID: (\d+)/g;
-        const matches = [...text.matchAll(carIdRegex)];
-        return matches.map(match => parseInt(match[1]));
+        // Array of regex patterns to match different ID formats
+        const patterns = [
+            /ID:\s*(\d+)/g,           // Matches "ID: 123"
+            /Car ID:\s*(\d+)/g,       // Matches "Car ID: 123"
+            /\[ID:\s*(\d+)\]/g,       // Matches "[ID: 123]"
+            /\[Car ID:\s*(\d+)\]/g,   // Matches "[Car ID: 123]"
+            /\(ID:\s*(\d+)\)/g,       // Matches "(ID: 123)"
+            /\(Car ID:\s*(\d+)\)/g,   // Matches "(Car ID: 123)"
+            /#(\d+)/g,                // Matches "#123"
+            /ID\s*(\d+)/g,            // Matches "ID 123"
+            /Car\s*ID\s*(\d+)/g,      // Matches "Car ID 123"
+            /ID=(\d+)/g,              // Matches "ID=123"
+            /Car\s*ID=(\d+)/g         // Matches "Car ID=123"
+        ];
+
+        // Set to store unique IDs
+        const uniqueIds = new Set<number>();
+
+        // Try each pattern
+        patterns.forEach(pattern => {
+            const matches = [...text.matchAll(pattern)];
+            matches.forEach(match => {
+                const id = parseInt(match[1]);
+                if (!isNaN(id)) {
+                    uniqueIds.add(id);
+                }
+            });
+        });
+
+        // Convert Set to Array and sort
+        return Array.from(uniqueIds).sort((a, b) => a - b);
     };
 
     const fetchCarsByIds = async (carIds: number[]): Promise<Car[]> => {
