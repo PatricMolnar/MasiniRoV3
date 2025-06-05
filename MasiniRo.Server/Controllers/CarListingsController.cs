@@ -35,6 +35,9 @@ namespace MasiniRo.Server.Controllers
                     c.Price,
                     c.Year,
                     c.Mileage,
+                    c.Horsepower,
+                    c.CubicCapacity,
+                    c.EngineType,
                     c.Description,
                     c.ImageUrl,
                     c.CreatedAt,
@@ -63,6 +66,9 @@ namespace MasiniRo.Server.Controllers
                     c.Price,
                     c.Year,
                     c.Mileage,
+                    c.Horsepower,
+                    c.CubicCapacity,
+                    c.EngineType,
                     c.Description,
                     c.ImageUrl,
                     c.CreatedAt,
@@ -96,6 +102,9 @@ namespace MasiniRo.Server.Controllers
                     c.Price,
                     c.Year,
                     c.Mileage,
+                    c.Horsepower,
+                    c.CubicCapacity,
+                    c.EngineType,
                     c.Description,
                     c.ImageUrl,
                     c.CreatedAt,
@@ -151,6 +160,9 @@ namespace MasiniRo.Server.Controllers
                     Price = carListingDto.Price,
                     Year = carListingDto.Year,
                     Mileage = carListingDto.Mileage,
+                    Horsepower = carListingDto.Horsepower,
+                    CubicCapacity = carListingDto.CubicCapacity,
+                    EngineType = carListingDto.EngineType,
                     Description = carListingDto.Description,
                     ImageUrl = System.Text.Json.JsonSerializer.Serialize(imagePaths),
                     UserId = carListingDto.UserId,
@@ -194,6 +206,9 @@ namespace MasiniRo.Server.Controllers
                     return BadRequest(new { message = validationResult.ErrorMessage });
                 }
 
+                // Log incoming DTO values for debugging
+                Console.WriteLine($"Incoming Update DTO - Horsepower: {carListingDto.Horsepower}, CubicCapacity: {carListingDto.CubicCapacity}, EngineType: {carListingDto.EngineType}");
+
                 // Update basic fields
                 carListing.Title = carListingDto.Title;
                 carListing.Brand = carListingDto.Brand;
@@ -201,6 +216,9 @@ namespace MasiniRo.Server.Controllers
                 carListing.Price = carListingDto.Price;
                 carListing.Year = carListingDto.Year;
                 carListing.Mileage = carListingDto.Mileage;
+                carListing.Horsepower = carListingDto.Horsepower;
+                carListing.CubicCapacity = carListingDto.CubicCapacity;
+                carListing.EngineType = carListingDto.EngineType;
                 carListing.Description = carListingDto.Description;
 
                 // Handle image updates
@@ -208,6 +226,9 @@ namespace MasiniRo.Server.Controllers
 
                 await _context.SaveChangesAsync();
                 
+                // Log saved entity values for debugging
+                Console.WriteLine($"Saved CarListing - Horsepower: {carListing.Horsepower}, CubicCapacity: {carListing.CubicCapacity}, EngineType: {carListing.EngineType}");
+
                 return Ok(new { message = "Car listing updated successfully!" });
             }
             catch (Exception ex)
@@ -378,6 +399,15 @@ namespace MasiniRo.Server.Controllers
             if (dto.Mileage < 0)
                 return new SimpleValidationResult(false, "Mileage cannot be negative.");
 
+            if (dto.Horsepower <= 0)
+                return new SimpleValidationResult(false, "Horsepower must be greater than 0.");
+
+            if (dto.CubicCapacity <= 0)
+                return new SimpleValidationResult(false, "Cubic capacity must be greater than 0.");
+
+            if (string.IsNullOrWhiteSpace(dto.EngineType))
+                return new SimpleValidationResult(false, "Engine type is required.");
+
             if (string.IsNullOrWhiteSpace(dto.Description))
                 return new SimpleValidationResult(false, "Description is required.");
 
@@ -409,6 +439,15 @@ namespace MasiniRo.Server.Controllers
 
             if (dto.Mileage < 0)
                 return new SimpleValidationResult(false, "Mileage cannot be negative.");
+
+            if (dto.Horsepower <= 0)
+                return new SimpleValidationResult(false, "Horsepower must be greater than 0.");
+
+            if (dto.CubicCapacity <= 0)
+                return new SimpleValidationResult(false, "Cubic capacity must be greater than 0.");
+
+            if (string.IsNullOrWhiteSpace(dto.EngineType))
+                return new SimpleValidationResult(false, "Engine type is required.");
 
             if (string.IsNullOrWhiteSpace(dto.Description))
                 return new SimpleValidationResult(false, "Description is required.");
@@ -483,6 +522,9 @@ namespace MasiniRo.Server.Controllers
         public decimal Price { get; set; }
         public int Year { get; set; }
         public int Mileage { get; set; }
+        public int Horsepower { get; set; }
+        public int CubicCapacity { get; set; }
+        public string EngineType { get; set; }
         public string Description { get; set; }
         public int UserId { get; set; }
         public List<IFormFile>? Images { get; set; } = new List<IFormFile>();
@@ -496,6 +538,9 @@ namespace MasiniRo.Server.Controllers
         public decimal Price { get; set; }
         public int Year { get; set; }
         public int Mileage { get; set; }
+        public int Horsepower { get; set; }
+        public int CubicCapacity { get; set; }
+        public string EngineType { get; set; }
         public string Description { get; set; }
         public int UserId { get; set; }
         public List<IFormFile>? Images { get; set; } = new List<IFormFile>();

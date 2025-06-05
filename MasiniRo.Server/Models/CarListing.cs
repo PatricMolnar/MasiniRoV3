@@ -13,6 +13,9 @@ namespace MasiniRo.Server.Models
         public decimal Price { get; set; }
         public int Year { get; set; }
         public int Mileage { get; set; }
+        public int Horsepower { get; set; }  // Horsepower in CP
+        public int CubicCapacity { get; set; }  // Engine displacement in cm³
+        public string EngineType { get; set; }  // Engine configuration (V6, V8, etc.)
         public string Description { get; set; }
         public string ImageUrl { get; set; }
         

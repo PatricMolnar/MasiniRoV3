@@ -12,6 +12,9 @@ const AddCarForm = ({ onClose, onCarAdded }) => {
     price: "",
     year: "",
     mileage: "",
+    horsepower: "",
+    cubicCapacity: "",
+    engineType: "",
     description: "",
     images: [],
   });
@@ -129,6 +132,9 @@ const AddCarForm = ({ onClose, onCarAdded }) => {
       formDataToSend.append("price", parseFloat(formData.price));
       formDataToSend.append("year", parseInt(formData.year));
       formDataToSend.append("mileage", parseInt(formData.mileage));
+      formDataToSend.append("horsepower", parseInt(formData.horsepower));
+      formDataToSend.append("cubicCapacity", parseInt(formData.cubicCapacity));
+      formDataToSend.append("engineType", formData.engineType);
       formDataToSend.append("description", formData.description);
       formDataToSend.append("userId", user.id);
 
@@ -328,17 +334,71 @@ const AddCarForm = ({ onClose, onCarAdded }) => {
 
           <div className="form-row">
             <div className="form-group">
-              <label htmlFor="mileage">Mileage (km):</label>
+              <label htmlFor="mileage">Mileage (km) *</label>
               <input
                 type="number"
                 id="mileage"
                 name="mileage"
                 value={formData.mileage}
                 onChange={handleChange}
-                min="0"
-                placeholder="10000 km"
                 required
+                min="0"
+                placeholder="e.g., 50000"
               />
+            </div>
+            <div className="form-group">
+              <label htmlFor="horsepower">Horsepower (CP) *</label>
+              <input
+                type="number"
+                id="horsepower"
+                name="horsepower"
+                value={formData.horsepower}
+                onChange={handleChange}
+                required
+                min="1"
+                placeholder="e.g., 150"
+              />
+            </div>
+          </div>
+
+          <div className="form-row">
+            <div className="form-group">
+              <label htmlFor="cubicCapacity">Cubic Capacity (cm³) *</label>
+              <input
+                type="number"
+                id="cubicCapacity"
+                name="cubicCapacity"
+                value={formData.cubicCapacity}
+                onChange={handleChange}
+                required
+                min="1"
+                placeholder="e.g., 2000"
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="engineType">Engine Type *</label>
+              <select
+                id="engineType"
+                name="engineType"
+                value={formData.engineType}
+                onChange={handleChange}
+                required
+              >
+                <option value="">Select Engine Type</option>
+                <option value="I3">Inline 3</option>
+                <option value="I4">Inline 4</option>
+                <option value="I5">Inline 5</option>
+                <option value="I6">Inline 6</option>
+                <option value="V6">V6</option>
+                <option value="V8">V8</option>
+                <option value="V10">V10</option>
+                <option value="V12">V12</option>
+                <option value="W12">W12</option>
+                <option value="W16">W16</option>
+                <option value="Electric">Electric</option>
+                <option value="Hybrid">Hybrid</option>
+                <option value="Other">Other</option>
+              </select>
             </div>
           </div>
 

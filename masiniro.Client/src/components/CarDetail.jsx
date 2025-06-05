@@ -3,12 +3,15 @@ import { useParams } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import ContactSellerPopup from "../components/ContactSellerPopup";
 import "../styles/CarDetail.css";
+import Header from "../components/Header";
+import { useNavigate } from 'react-router-dom';
 
 const backendUrl = "http://localhost:5226";
 
 const CarDetail = () => {
   const { id } = useParams();
   const { user } = useAuth(); // Get current logged-in user
+  const navigate = useNavigate(); // Initialize useNavigate
   const [car, setCar] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -16,6 +19,9 @@ const CarDetail = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isFavorited, setIsFavorited] = useState(false);
   const [isLoadingSave, setIsLoadingSave] = useState(false);
+  
+  // State for SearchBar (basic implementation for navigation)
+  const [isSearching, setIsSearching] = useState(false);
 
   useEffect(() => {
     const fetchCarDetails = async () => {
@@ -188,6 +194,16 @@ const CarDetail = () => {
     setShowContactPopup(false);
   };
 
+  // Handle search from the SearchBar - navigate to marketplace with query
+  const handleSearch = (searchTerm, filters) => {
+    // In a real application, you might want to handle filters too
+    // For now, just navigate with the search term
+    setIsSearching(true); // Indicate search is starting (briefly)
+    navigate(`/marketplace?search=${encodeURIComponent(searchTerm)}`);
+    // Note: isSearching state might not be fully utilized here as navigation happens immediately
+    // Resetting it might require effect or handling on marketplace load
+  };
+
   if (loading) {
     return <div className="car-detail-loading">Loading...</div>;
   }
@@ -214,6 +230,8 @@ const CarDetail = () => {
 
   return (
     <div className="car-detail-container">
+      <Header />
+      
       <div className="car-detail-header">
         <h1>{car.title}</h1>
         <p className="car-price">${car.price.toLocaleString()}</p>
@@ -330,6 +348,18 @@ const CarDetail = () => {
             <div className="spec-item">
               <span className="spec-label">Mileage:</span>
               <span className="spec-value">{car.mileage ? `${car.mileage.toLocaleString()} km` : "N/A"}</span>
+            </div>
+            <div className="spec-item">
+              <span className="spec-label">Horsepower:</span>
+              <span className="spec-value">{car.horsepower ? `${car.horsepower} CP` : "N/A"}</span>
+            </div>
+            <div className="spec-item">
+              <span className="spec-label">Cubic Capacity:</span>
+              <span className="spec-value">{car.cubicCapacity ? `${car.cubicCapacity} cm³` : "N/A"}</span>
+            </div>
+            <div className="spec-item">
+              <span className="spec-label">Engine Type:</span>
+              <span className="spec-value">{car.engineType || "N/A"}</span>
             </div>
             <div className="spec-item">
               <span className="spec-label">Price:</span>
